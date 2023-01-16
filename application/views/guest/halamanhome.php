@@ -76,7 +76,7 @@
                             <td><?php $date = date_create($tk->tgl_sampai);
                                 echo date_format($date, "d-m-Y H:i:s"); ?></td>
                             <td>
-                                <a href="" class="btn btn-outline-success btn-sm">Pesan</a>
+                                <a href="<?= base_url('pesan/' . $tk->id . '?p=' . $penumpang) ?>" class="btn btn-outline-success btn-sm">Pesan</a>
                             </td>
                         </tr>
                     <?php endforeach; ?>

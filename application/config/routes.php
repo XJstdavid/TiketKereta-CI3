@@ -1,6 +1,8 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
+$route['pesanTiket'] = 'guest/pesanTiket';
+$route['pesan/(:any)'] = 'guest/pesan/$1';
 $route['editJadwal'] = 'admin/update_jadwal';
 $route['admin/dashboard/edit-jadwal/(:any)'] = 'admin/editJadwal/$1';
 $route['hapusJadwal/(:any)'] = 'admin/hapusJadwal/$1';

@@ -3,6 +3,14 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Admin extends CI_Controller
 {
+    public function __construct()
+    {
+        parent::__construct();
+        $this->load->model('auth_model');
+        if (!$this->auth_model->current_user()) {
+            redirect('auth/login');
+        }
+    }
     // public function halamanlogin()
     // {
     //     $this->load->view('admin/login');
@@ -55,17 +63,21 @@ class Admin extends CI_Controller
     public function tambah_stasiun()
     {
         $nama = $this->input->post('stasiun');
+        $image = $_FILES['image']['tmp_name'];
+
+        $path = "upload/";
+        $imagePath = $path . $mama . time() . ".png";
+        move_uploaded_file($image, $imagePath);
 
         $data = array(
             'nama_stasiun' => $nama,
+            'image' => base_url() . $imagePath,
         );
 
         if (isset($_POST['submit'])) {
             $this->M_Admin->tambah_stasiun($data);
-            $this->session->set_flashdata('berhasil', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+            $this->session->set_flashdata('berhasil', '<div class="alert alert-success alert-dismissible fade show" role="alert" style="width: 100%">
             <strong>Berhasil!</strong> Data berhasil ditambahkan
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span></button>
             </div>');
         }
 
@@ -75,10 +87,8 @@ class Admin extends CI_Controller
     public function hapus_stasiun($id)
     {
         $remove = $this->M_Admin->delete_stasiun($id);
-        $this->session->set_flashdata('berhasil', '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <strong>Berhasil!</strong> Data berhasil di busek
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span></button>
+        $this->session->set_flashdata('berhasil', '<div class="alert alert-danger alert-dismissible fade show" role="alert" style="width: 100%">
+            <strong>Berhasil!</strong> Data berhasil di busek bro
             </div>');
         redirect(base_url('admin/dashboard'));
     }
@@ -94,12 +104,11 @@ class Admin extends CI_Controller
     public function update_stasiun()
     {
         $nama = $this->input->post('nama_stasiun');
+        $img = $this->input->post('image');
 
-        $update = $this->M_Admin->update_stasiun($nama);
-        $this->session->set_flashdata('berhasil', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+        $update = $this->M_Admin->update_stasiun($nama, $img);
+        $this->session->set_flashdata('berhasil', '<div class="alert alert-success alert-dismissible fade show" role="alert" style="width: 100%">
             <strong>Berhasil!</strong> Data berhasil di update
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span></button>
             </div>');
 
         redirect(base_url('admin/dashboard'));
@@ -128,10 +137,8 @@ class Admin extends CI_Controller
 
         if (isset($_POST['submit'])) {
             $this->M_Admin->tambah_jadwal($data);
-            $this->session->set_flashdata('berhasil', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+            $this->session->set_flashdata('berhasil', '<div class="alert alert-success alert-dismissible fade show" role="alert" style="width: 100%">
         <strong>Berhasil!</strong> Data berhasil di tambahkan
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span></button>
         </div>');
         }
 
@@ -141,10 +148,8 @@ class Admin extends CI_Controller
     public function hapusJadwal($id)
     {
         $remove = $this->M_Admin->hapusJadwal($id);
-        $this->session->set_flashdata('berhasil', '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+        $this->session->set_flashdata('berhasil', '<div class="alert alert-danger alert-dismissible fade show" role="alert" style="width: 100%">
             <strong>Berhasil!</strong> Data berhasil di busek
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span></button>
             </div>');
         redirect(base_url('admin/dashboard/kelola-jadwal'));
     }
@@ -169,10 +174,8 @@ class Admin extends CI_Controller
         );
 
         $this->M_Admin->edit_jadwal($data);
-        $this->session->set_flashdata('berhasil', '<div class="alert alert-success alert-dismissible fade show" role="alert">
+        $this->session->set_flashdata('berhasil', '<div class="alert alert-success alert-dismissible fade show" role="alert" style="width: 100%">
             <strong>Berhasil!</strong> Data berhasil di update
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span></button>
             </div>');
         redirect(base_url('admin/dashboard/kelola-jadwal'));
     }

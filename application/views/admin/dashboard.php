@@ -5,93 +5,74 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= $judul; ?> | Tambah Data Stasiun</title>
-    <link rel="stylesheet" href="<?= base_url('assets/css/bootstrap.min.css') ?>">
-    <link rel="stylesheet" href="<?= base_url('assets/css/bootstrap.css') ?>">
-    <link rel="stylesheet" href="<?= base_url('assets/css/costum.css') ?>">
+    <title><?= $judul; ?> | Kelola Jadwal</title>
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <link href='<?= base_url('assets/css/costum.css') ?>' rel='stylesheet'>
+
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/css/select2.min.css">
 </head>
 
 <body>
 
-    <div class="sidebar close">
-        <div class="logo-details">
-            <i class='bx bx-train'></i>
-            <span class="logo_name">X-Kereta</span>
-        </div>
-        <ul class="nav-links">
-            <li>
-                <a href="<?= base_url('admin/dashboard') ?>">
-                    <i class='bx bx-home'></i>
-                    <span class="link_name">Home</span>
-                </a>
-                <ul class="sub-menu blank">
-                    <li><a class="link_name" href="<?= base_url('admin/dashboard') ?>">Home</a></li>
-                </ul>
-            </li>
-            <li>
-                <div class="icon-link">
-                    <a>
-                        <i class='bx bxs-data'></i>
-                        <span class="link_name">Kelola Data</span>
-                    </a>
-                    <i class='bx bxs-chevron-down arrow'></i>
-                </div>
-                <ul class="sub-menu">
-                    <li><a href="<?= base_url('admin/dashboard/kelola-jadwal') ?>">Jadwal</a></li>
-                </ul>
-            </li>
-            <li>
-                <div class="profile-details">
-                    <div class="profile-content">
-                        <img src="https://github.com/Sacsam005/dropdown-menu/blob/master/image/profile.png?raw=true" alt="profileImg">
+    <body id="body-pd">
+        <header class="header" id="header">
+            <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> </div>
+        </header>
+        <div class="l-navbar" id="nav-bar">
+            <nav class="nav">
+                <div>
+                    <a href="#" class="nav_logo">
+                        <i class='bx bx-layer nav_logo-icon'></i>
+                        <span class="nav_logo-name">Admin Panel</span> </a>
+                    <div class="nav_list">
+                        <a href="<?= base_url('admin/dashboard') ?>" class="nav_link active"><i class='bx bx-grid-alt nav_icon'></i> <span class="nav_name">Data Stasiun</span></a>
+                        <a href="<?= base_url('admin/dashboard/kelola-jadwal') ?>" class="nav_link"> <i class='bx bx-grid-alt nav_icon'></i> <span class="nav_name">Data Jadwal</span> </a>
+                        </a>
                     </div>
-                    <div class="name-job">
-                        <div class="profile_name">Logout</div>
-                    </div>
-                    <i class='bx bx-log-out'></i>
                 </div>
-            </li>
-        </ul>
-    </div>
-    <section class="home-section">
-        <div class="home-content">
-            <i class='bx bx-menu'></i>
-            <span class="text">Tambah Data Stasiun</span>
+                <a href="<?= base_url('auth/logout') ?>" class="nav_link"> <i class='bx bx-log-out nav_icon'></i> <span class="nav_name">SignOut</span> </a>
+            </nav>
         </div>
+        <!--Container Main start-->
         <div class="container-fluid my-5">
             <div class="row">
 
-                <div class="col-md-12">
+                <div class="col-md-12 mt-4">
                     <div class="card">
-                        <div class="card-header bg-primary text-white text-center">Daftar Stasiun</div>
+                        <div class="card-header bg-primary text-white text-center" style="margin-bottom: 10px;">Daftar Stasiun</div>
+                        <?= $this->session->flashdata('pesan') ?>
                         <div class="col-md-12 mt-3">
-                            <button type="button" class="btn btn-outline-warning float-right" data-toggle="modal" data-target="#exampleModal">
-                                Tambah Data Stasiun
-                            </button>
+                            <a class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#exampleModal" style="margin-left: 10px; margin-bottom: 10px;">Tambah Data Stasiun</a>
+                            <br>
                             <?= $this->session->flashdata('berhasil'); ?>
                         </div>
                         <div class="card-body">
-                            <table class="table table-condesed table-hover">
+                            <table id="data" class="display table table-bordered table-sm">
                                 <thead>
                                     <tr>
                                         <th>No</th>
                                         <th>Nama Stasiun</th>
+                                        <th>Gambar</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php $no = 1; ?>
-                                    <?php foreach ($stasiun as $st) : ?>
+                                    <?php $no = 1;
+                                    foreach ($stasiun as $st) { ?>
                                         <tr>
                                             <td><?= $no++ ?></td>
                                             <td><?= $st->nama_stasiun ?></td>
+                                            <td><img style="width: 200px" src="<?php echo $st->image; ?>"></td>
                                             <td>
                                                 <a href="<?= base_url('admin/dashboard/edit/' . $st->id) ?>" class="btn btn-outline-warning btn-sm"><i class="fa-solid fa-pen-to-square"></i></a>
                                                 <a href="<?= base_url('hapusStasiun/' . $st->id) ?>" class="delete btn btn-outline-danger btn-sm"><i class=" fa-solid fa-trash"></i></a>
                                             </td>
                                         </tr>
-                                    <?php endforeach ?>
+                                    <?php } ?>
                                 </tbody>
                             </table>
                         </div>
@@ -106,15 +87,19 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Form Tambah Data Stasiun</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form class="form-horizontal" method="post" action="<?php echo base_url('tambahStasiun') ?>">
+                        <form class="form-horizontal" method="post" action="<?php echo base_url('tambahStasiun') ?>" enctype="multipart/form-data">
                             <div class="form-group">
                                 <label>Nama Stasiun</label>
                                 <input type="text" class="form-control" name="stasiun" placeholder="Nama Stasiun">
+                            </div>
+                            <div class="form-group">
+                                <label>Upload Gambar</label>
+                                <input type="file" class="form-control" name="image" placeholder="Gambar Stasiun" accept="image/" onchange="loadFile(event)">
+                                <br>
+                                <img id="output" width="100" src="https://st4.depositphotos.com/14953852/22772/v/600/depositphotos_227725052-stock-illustration-image-available-icon-flat-vector.jpg" class="center">
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -125,59 +110,78 @@
                 </div>
             </div>
         </div>
-    </section>
-
-    <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">XKereta</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarText">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                </li>
-            </ul> -->
-    <!-- <span class="navbar-text">
-                <a href="<?= base_url('logout') ?>" class="text-muted" style="text-decoration: none;">Logout</a>
-            </span> -->
-    <!-- </div>
-    </nav> -->
+        </div>
+        <!--Container Main end-->
 
 
 
-    <!-- Script JS -->
-    <script src="<?= base_url('assets/js/bootstrap.min.js') ?>"></script>
-    <script src="<?= base_url('assets/js/costum.js') ?>"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-    <script src="https://kit.fontawesome.com/ff4c215153.js" crossorigin="anonymous"></script>
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script>
-        $(document).ready(function() {
-            $(".delete").click(function(e) {
-                e.preventDefault();
-                const href = $(this).attr('href');
+        <!-- Script JS -->
+        <script src="<?= base_url('assets/js/costum.js') ?>"></script>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+        <script src="https://kit.fontawesome.com/ff4c215153.js" crossorigin="anonymous"></script>
 
-                Swal.fire({
-                    title: 'Apakah kamu yakin ingin menghapus data?',
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Hapus!',
-                }).then((result) => {
-                    if (result.isConfirmed) {
+        <!-- datatable -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/jszip-2.5.0/dt-1.13.1/af-2.5.1/b-2.3.3/b-colvis-2.3.3/b-html5-2Z3.3/b-print-2.3.3/sb-1.4.0/datatables.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+        <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js"></script>
 
-                        if (result.value) {
-                            document.location.href = href;
-                        }
+    </body>
+
+</html>
+
+<script>
+    var loadFile = function(event) {
+        var reader = new FileReader();
+        reader.onload = function() {
+            var output = document.getElementById('output');
+            output.src = reader.result;
+        };
+        reader.readAsDataURL(event.target.files[0]);
+    };
+</script>
+
+<script>
+    $(document).ready(function() {
+        $(".delete").click(function(e) {
+            e.preventDefault();
+            const href = $(this).attr('href');
+
+            Swal.fire({
+                title: 'Apakah kamu yakin ingin menghapus data?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Hapus!',
+            }).then((result) => {
+                if (result.isConfirmed) {
+
+                    if (result.value) {
+                        document.location.href = href;
                     }
-                })
-            });
+                }
+            })
         });
-    </script>
+    });
+</script>
+
+<script>
+    $(document).ready(function() {
+        $('#data').DataTable();
+    });
+</script>
+
+<script>
+    $(".theSelect").select2();
+    $(".theSelect").select2({
+        dropdownParent: $("#create")
+    })
+</script>
 </body>
 
 </html>

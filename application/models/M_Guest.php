@@ -18,4 +18,13 @@ class M_Guest extends CI_Model
         $this->db->join('stasiun as Tujuan', 'jadwal.tujuan = Tujuan.id', 'left');
         return $this->db->get();
     }
+
+    public function getDataInfoPesan($id)
+    {
+        $this->db->select('jadwal.*, Asal.nama_stasiun AS ASAL, Tujuan.nama_stasiun AS TUJUAN');
+        $this->db->where('jadwal.id', $id);
+        $this->db->join('stasiun as Asal', 'jadwal.asal = Asal.id', 'left');
+        $this->db->join('stasiun as Tujuan', 'jadwal.tujuan = Tujuan.id', 'left');
+        return $this->db->get('jadwal');
+    }
 }
