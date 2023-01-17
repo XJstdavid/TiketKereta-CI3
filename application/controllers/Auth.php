@@ -28,7 +28,7 @@ class Auth extends CI_Controller
         </div>');
             redirect('admin');
         } else {
-            $this->session->set_flashdata('message_login_error', '<div style="width:100%" class="alert alert-danger alert-dismissible fade show" role="alert">
+            $this->session->set_flashdata('message_login_error', '<div style="height: 65px" class="alert alert-danger fade show" role="alert">
             <strong>Gagal!</strong> username atau password salah!
             </div>');
         }

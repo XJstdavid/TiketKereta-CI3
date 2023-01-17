@@ -25,12 +25,13 @@
         <div class="l-navbar" id="nav-bar">
             <nav class="nav">
                 <div>
-                    <a href="#" class="nav_logo">
-                        <i class='bx bx-layer nav_logo-icon'></i>
+                    <a href="<?= base_url() ?>" class="nav_logo">
+                        <i class="bi bi-train-front-fill" style="color: white;"></i>
                         <span class="nav_logo-name">Admin Panel</span> </a>
                     <div class="nav_list">
-                        <a href="<?= base_url('admin/dashboard') ?>" class="nav_link active"><i class='bx bx-grid-alt nav_icon'></i> <span class="nav_name">Data Stasiun</span></a>
-                        <a href="<?= base_url('admin/dashboard/kelola-jadwal') ?>" class="nav_link"> <i class='bx bx-grid-alt nav_icon'></i> <span class="nav_name">Data Jadwal</span> </a>
+                        <a href="<?= base_url('admin/dashboard') ?>" class="nav_link active"><i class="bi bi-clipboard-data-fill"></i><span class="nav_name">Data Stasiun</span></a>
+                        <a href="<?= base_url('admin/dashboard/kelola-jadwal') ?>" class="nav_link">
+                            <i class="bi bi-clipboard-data-fill"></i> <span class="nav_name">Data Jadwal</span>
                         </a>
                     </div>
                 </div>

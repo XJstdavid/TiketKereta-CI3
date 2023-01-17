@@ -25,12 +25,13 @@
         <div class="l-navbar" id="nav-bar">
             <nav class="nav">
                 <div>
-                    <a href="#" class="nav_logo">
-                        <i class='bx bx-layer nav_logo-icon'></i>
+                    <a href="<?= base_url() ?>" class="nav_logo">
+                        <i class="bi bi-train-front-fill" style="color: white;"></i>
                         <span class="nav_logo-name">Admin Panel</span> </a>
                     <div class="nav_list">
-                        <a href="<?= base_url('admin/dashboard') ?>" class="nav_link active"><i class='bx bx-grid-alt nav_icon'></i> <span class="nav_name">Data Stasiun</span></a>
-                        <a href="<?= base_url('admin/dashboard/kelola-jadwal') ?>" class="nav_link"> <i class='bx bx-grid-alt nav_icon'></i> <span class="nav_name">Data Jadwal</span> </a>
+                        <a href="<?= base_url('admin/dashboard') ?>" class="nav_link active"><i class="bi bi-clipboard-data-fill"></i><span class="nav_name">Data Stasiun</span></a>
+                        <a href="<?= base_url('admin/dashboard/kelola-jadwal') ?>" class="nav_link">
+                            <i class="bi bi-clipboard-data-fill"></i> <span class="nav_name">Data Jadwal</span>
                         </a>
                     </div>
                 </div>
@@ -49,7 +50,7 @@
                                 <div class="card">
                                     <div class="card-header bg-primary text-white text-center">Daftar Jadwal</div>
                                     <div class="col-md-12 mt-3">
-                                        <a class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#exampleModal" style="margin-left: 10px;">Tambah Data Jadwal</a>
+                                        <a class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#exampleModal" style="margin-left: 10px; margin-bottom: 15px;">Tambah Data Jadwal</a>
                                         <br>
                                         <?= $this->session->flashdata('berhasil'); ?>
                                     </div>
@@ -75,8 +76,8 @@
                                                         <td><?= $jd->nama_kereta ?></td>
                                                         <td><?= $jd->ASAL ?></td>
                                                         <td><?= $jd->TUJUAN ?></td>
-                                                        <td><?= $jd->tgl_berangkat ?></td>
-                                                        <td><?= $jd->tgl_sampai ?></td>
+                                                        <td><?= format_indo(date($jd->tgl_berangkat)) ?></td>
+                                                        <td><?= format_indo(date($jd->tgl_sampai)) ?></td>
                                                         <td><?= $jd->kelas ?></td>
                                                         <td>
                                                             <a href="<?= base_url('admin/dashboard/edit-jadwal/' . $jd->id) ?>" class="btn btn-outline-warning btn-sm"><i class="fa-solid fa-pen-to-square"></i></a>
@@ -145,6 +146,10 @@
                                             </select>
                                         </div>
 
+                                        <div class="form-group">
+                                            <label>Harga</label>
+                                            <input type="number" name="harga" placeholder="Harga" class="form-control">
+                                        </div>
                                         <div class="modal-footer">
                                             <button type="reset" class="btn btn-secondary" data-dismiss="modal">reset</button>
                                             <button type="submit" name="submit" class="btn btn-primary">Tambah Jadwal</button>

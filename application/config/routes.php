@@ -1,6 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
+$route['pembayaran'] = 'guest/halamanPembayaran';
 $route['pesanTiket'] = 'guest/pesanTiket';
 $route['pesan/(:any)'] = 'guest/pesan/$1';
 $route['editJadwal'] = 'admin/update_jadwal';

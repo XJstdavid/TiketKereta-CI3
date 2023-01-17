@@ -35,12 +35,8 @@ class M_Admin extends CI_Model
         return $this->db->get_where('stasiun', $data);
     }
 
-    public function update_stasiun($nama, $img)
+    public function update_stasiun($data, $id)
     {
-        $data = array(
-            'nama_stasiun' => $nama,
-            'image' => $img
-        );
         $this->db->where('id', $this->input->post('id'));
         return $this->db->update('stasiun', $data);
     }

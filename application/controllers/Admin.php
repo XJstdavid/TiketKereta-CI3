@@ -87,7 +87,8 @@ class Admin extends CI_Controller
     public function hapus_stasiun($id)
     {
         $remove = $this->M_Admin->delete_stasiun($id);
-        $this->session->set_flashdata('berhasil', '<div class="alert alert-danger alert-dismissible fade show" role="alert" style="width: 100%">
+
+        $this->session->set_flashdata('berhasil', '<div class="alert alert-succes alert-dismissible fade show" role="alert" style="width: 100%">
             <strong>Berhasil!</strong> Data berhasil di busek bro
             </div>');
         redirect(base_url('admin/dashboard'));
@@ -103,10 +104,33 @@ class Admin extends CI_Controller
 
     public function update_stasiun()
     {
-        $nama = $this->input->post('nama_stasiun');
-        $img = $this->input->post('image');
+        $config_logo_image = array(
+            'allowed_types' => 'jpg|jpeg|gif|png',
+            'upload_path' => 'upload/', //root path for image
+            'max_size' => 2000,
+        );
 
-        $update = $this->M_Admin->update_stasiun($nama, $img);
+
+        $this->load->library('upload', $config_logo_image);
+        if ($this->upload->do_upload('image')) {
+            $nama = $this->input->post('nama_stasiun');
+            $image = $_FILES["image"]["tmp_name"];
+            $path = "upload/";
+            $imagePath =  $path . $name . time() . ".png";
+            move_uploaded_file($image, $imagePath);
+
+            $data = [
+                'nama_stasiun' => $nama,
+                'image' => base_url() . $imagePath,
+            ];
+        } else {
+            $nama = $this->input->post('nama_stasiun');
+            $data = [
+                'nama_stasiun' => $nama,
+            ];
+        }
+
+        $update = $this->M_Admin->update_stasiun($data, $id);
         $this->session->set_flashdata('berhasil', '<div class="alert alert-success alert-dismissible fade show" role="alert" style="width: 100%">
             <strong>Berhasil!</strong> Data berhasil di update
             </div>');
@@ -133,6 +157,7 @@ class Admin extends CI_Controller
             'tgl_berangkat' => $this->input->post('tgl_berangkat'),
             'tgl_sampai' => $this->input->post('tgl_sampai'),
             'kelas' => $this->input->post('kelas'),
+            'harga' => $this->input->post('harga'),
         );
 
         if (isset($_POST['submit'])) {
@@ -148,7 +173,7 @@ class Admin extends CI_Controller
     public function hapusJadwal($id)
     {
         $remove = $this->M_Admin->hapusJadwal($id);
-        $this->session->set_flashdata('berhasil', '<div class="alert alert-danger alert-dismissible fade show" role="alert" style="width: 100%">
+        $this->session->set_flashdata('berhasil', '<div class="alert alert-succes alert-dismissible fade show" role="alert" style="width: 100%">
             <strong>Berhasil!</strong> Data berhasil di busek
             </div>');
         redirect(base_url('admin/dashboard/kelola-jadwal'));

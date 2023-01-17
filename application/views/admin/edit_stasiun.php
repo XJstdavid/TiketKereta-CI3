@@ -25,12 +25,13 @@
         <div class="l-navbar" id="nav-bar">
             <nav class="nav">
                 <div>
-                    <a href="#" class="nav_logo">
-                        <i class='bx bx-layer nav_logo-icon'></i>
+                    <a href="<?= base_url() ?> " class="nav_logo">
+                        <i class="bi bi-train-front-fill" style="color: white;"></i>
                         <span class="nav_logo-name">Admin Panel</span> </a>
                     <div class="nav_list">
-                        <a href="<?= base_url('admin/dashboard') ?>" class="nav_link active"><i class='bx bx-grid-alt nav_icon'></i> <span class="nav_name">Data Stasiun</span></a>
-                        <a href="<?= base_url('admin/dashboard/kelola-jadwal') ?>" class="nav_link"> <i class='bx bx-grid-alt nav_icon'></i> <span class="nav_name">Data Jadwal</span> </a>
+                        <a href="<?= base_url('admin/dashboard') ?>" class="nav_link active"><i class="bi bi-clipboard-data-fill"></i><span class="nav_name">Data Stasiun</span></a>
+                        <a href="<?= base_url('admin/dashboard/kelola-jadwal') ?>" class="nav_link">
+                            <i class="bi bi-clipboard-data-fill"></i> <span class="nav_name">Data Jadwal</span>
                         </a>
                     </div>
                 </div>
@@ -58,7 +59,7 @@
                                                 <label>Upload Gambar</label>
                                                 <input type="file" class="form-control" name="image" placeholder="Gambar Stasiun" accept="image/" onchange="loadFile(event)">
                                                 <br>
-                                                <img id="output" width="100" src="https://st4.depositphotos.com/14953852/22772/v/600/depositphotos_227725052-stock-illustration-image-available-icon-flat-vector.jpg" class="center">
+                                                <img id="output" width="200" src="<?= $data_stasiun->image ?>" class="center">
                                             </div>
                                             <button class="btn btn-outline-warning btn-block mt-3">Update</button>
                                         </form>

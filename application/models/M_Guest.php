@@ -27,4 +27,29 @@ class M_Guest extends CI_Model
         $this->db->join('stasiun as Tujuan', 'jadwal.tujuan = Tujuan.id', 'left');
         return $this->db->get('jadwal');
     }
+
+    public function getTiket()
+    {
+        return $this->db->get('tiket');
+    }
+
+    public function insertPenumpang($data)
+    {
+        return $this->db->insert('penumpang', $data);
+    }
+
+    public function insertPemesan($data)
+    {
+        return $this->db->insert('tiket', $data);
+    }
+
+    public function getPembayaran()
+    {
+        return $this->db->get('pembayaran');
+    }
+
+    public function insertPembayaran($data)
+    {
+        return $this->db->insert('pembayaran', $data);
+    }
 }

@@ -49,10 +49,22 @@
                     <?= $_GET['p'] ?>
                 </div>
             </div>
+
+            <div class="form-group row">
+                <div class="col-md-2">
+                    <label>Harga Per Tiket</label>
+                </div>
+                <div class="col-md-10">
+                    <?= 'Rp. ' . number_format($info->harga, 0, ',', '.') ?>
+                </div>
+            </div>
         </div>
     </div>
     <form action="<?= base_url('pesanTiket') ?>" method="post">
         <input type="hidden" name="penumpang" value="<?= $_GET['p'] ?>">
+        <input type="hidden" name="id_jadwal" value="<?= $id_jadwal  ?>">
+        <input type="hidden" name="harga" value="<?= $info->harga  ?>">
+
         <div class="card my-3">
             <div class="card-header bg-primary text-white">Detail Penumpang</div>
             <div class="card-body">
@@ -72,7 +84,7 @@
                                     <input type="text" class="form-control" name="nama<?= $i ?>" required>
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control" name="identitas<?= $i ?>" required>
+                                    <input type="number" class="form-control" name="identitas<?= $i ?>" required>
                                 </td>
                             </tr>
                         <?php endfor; ?>
@@ -86,7 +98,7 @@
                 <div class="row">
                     <div class="col">
                         <label>Nama</label>
-                        <input type="text" class="form-control" placeholder="Nama Pemesan" name="nama" required>
+                        <input type="text" class="form-control" placeholder="Nama Pemesan" name="nama_pemesan" required>
                     </div>
                     <div class="col">
                         <label>Email</label>
@@ -94,7 +106,10 @@
                     </div>
                     <div class="col">
                         <label>No Telp</label>
-                        <input type="text" class="form-control" placeholder="No Telp Pemesan" name="email" required>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1">+62</span>
+                            <input type="number" class="form-control" placeholder="No Telp Pemesan" name="no_telp" required>
+                        </div>
                     </div>
                 </div>
                 <div class="clearfix my-3">

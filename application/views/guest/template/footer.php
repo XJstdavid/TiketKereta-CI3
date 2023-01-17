@@ -7,6 +7,16 @@
     <script>
         $(".theSelect").select2();
     </script>
+
+    <script>
+        $(document).ready(function() {
+            window.setTimeout(function() {
+                $(".text").fadeTo(500, 0).slideUp(500, function() {
+                    $(this).remove();
+                });
+            }, 2000);
+        });
+    </script>
     </body>
 
     </html>
