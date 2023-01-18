@@ -1,15 +1,25 @@
-<div class="text alert-success mt-3" id="success-alert">
-    <button type="button" class="close" data-dismiss="alert"></button>
-    <strong>Selamat!</strong>
-    Anda berhasil melakukan pemesanan
-</div>
+<?php if($this->session->flashdata('nomor') === null): ?>
+    <div class="container-fluid">
+        <div class="row justify-content-center my-5">
+            <div class="col-md-5">
+                <div class="card">
+                    <div class="card-body">
+                        <p class="text-danger text-center text-sm font-weight-bold" style="font-size: 11pt;">Anda Telah Menrefresh Halaman</p>
+                        <h5 class="text-info text-center">Silakan Lakukan Pemesanan Kembali Agar Mendapatkan Kode Pembayaran!</h5>
+                        <a href=" <?= base_url() ?>" class="btn btn-outline-success float-right btn-sm mt-3">Kembali Ke Pemesanan</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php else: ?>
 
 <div class="container-fluid">
     <div class="row justify-content-center my-5">
         <div class="col-md-5">
             <div class="card">
                 <div class="card-body">
-                    <p class="text-danger text-center text-sm font-weight-bold" style="font-size: 11pt;">Warning! Jangan Lakukan Refresh Agar Tidak Terjadi Kesalahan Sistem</p>
+                    <p class="text-danger text-center text-sm font-weight-bold" style="font-size: 11pt;">Warning! Jangan Lakukan Refresh Halaman Ini, Agar Tidak Terjadi Kesalahan Sistem</p>
                     <h5 class="text-info text-center">Silakan Lakukan Pembayaran Sesuai Detail Berikut!</h5>
                     <hr>
                     <h3 class="text-center">3850681669</h3>
@@ -30,3 +40,4 @@
         </div>
     </div>
 </div>
+<?php endif; ?>

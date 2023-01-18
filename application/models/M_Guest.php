@@ -52,4 +52,26 @@ class M_Guest extends CI_Model
     {
         return $this->db->insert('pembayaran', $data);
     }
+
+
+    public function getPembayaranWhere($kode)
+    {
+        $this->db->where('no_pembayaran', $kode);
+        return $this->db->get('pembayaran');
+    }
+
+    public function cekKonfirmasi($nomor)
+    {
+        $this->db->where('nomor_tiket',$nomor);
+        return $this->db->get('penumpang');
+    }
+
+    public function insertBukti($nama, $no)
+    {
+        $data  = array(
+            'bukti' => $nama,
+        );
+        $this->db->where('no_pembayaran' ,$no);
+        return $this->db->update('pembayaran', $data);
+    }
 }

@@ -1,7 +1,11 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-$route['pembayaran'] = 'guest/halamanPembayaran';
+
+$route['kirimKonfirmasi'] = 'guest/kirimKonfirmasi';
+$route['cekKonfirmasi'] = 'guest/cekKonfirmasi';
+
+$route['pembayaran'] = 'guest/halamanPembayaran/$no_pembayaran';
 $route['pesanTiket'] = 'guest/pesanTiket';
 $route['pesan/(:any)'] = 'guest/pesan/$1';
 $route['editJadwal'] = 'admin/update_jadwal';
@@ -24,9 +28,8 @@ $route['logout'] = 'admin/logout';
 $route['login'] = 'admin/halamanlogin';
 
 $route['konfirmasi'] = 'guest/halamankonfirmasi';
-// $route['default_controller'] = 'admin/halamanDashboard';
 $route['default_controller'] = 'guest/halamanhome';
 $route['admin'] = 'admin/halamanDashboard';
 
-$route['404_override'] = '';
+$route['404_override'] = 'Costum404';
 $route['translate_uri_dashes'] = FALSE;
