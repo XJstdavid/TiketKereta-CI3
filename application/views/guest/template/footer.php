@@ -24,6 +24,22 @@
             } else if (gerbong.val() === "3") {
                 gambar.attr('src', '<?= base_url('assets/gerbong/gerbong3.jpg') ?>');
             }
+
+            // Cek validasi
+            var bagian = $('#bagian').val();
+            var button = $('#btn_konfirmasi');
+            var pesan = $('#pesan');
+
+            if (gerbong.val() === "0" || bagian === "0") {
+                button.attr("disabled", true);
+                pesan.removeClass('d-none');
+                pesan.text("Pastikan anda telah memilih Gerbong  & Bagian !!");
+                pesan.addClass('text-danger');
+            } else {
+                button.attr("disabled", false);
+                pesan.addClass('d-none');
+                pesan.removeClass('text-danger');
+            }
         }
 
         function cekBagian() {
@@ -38,7 +54,40 @@
                 bagian_a.hide();
                 bagian_b.show();
             }
+
+            // Cek validasi
+            var bagian = $('#bagian').val();
+            var button = $('#btn_konfirmasi');
+            var pesan = $('#pesan');
+
+            if (gerbong.val() === "0" || bagian === "0") {
+                button.attr("disabled", true);
+                pesan.removeClass('d-none');
+                pesan.text("Pastikan anda telah memilih Gerbong, Bagian, & No Kursi  !!");
+                pesan.addClass('text-danger');
+            } else {
+                button.attr("disabled", false);
+                pesan.addClass('d-none');
+                pesan.removeClass('text-danger');
+            }
         }
+        $('#foto').change(function() {
+            var gerbong = $('#select_gerbong').val();
+            var bagian = $('#bagian').val();
+            var button = $('#btn_konfirmasi');
+            var pesan = $('#pesan');
+
+            if (gerbong === "0" || bagian === "0") {
+                button.attr("disabled", true);
+                pesan.removeClass('d-none');
+                pesan.text("Pastikan anda telah memilih Gerbong  & Bagian !!");
+                pesan.addClass('text-danger');
+            } else {
+                button.attr("disabled", false);
+                pesan.addClass('d-none');
+                pesan.removeClass('text-danger');
+            }
+        });
     </script>
     </body>
 

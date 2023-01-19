@@ -53,15 +53,14 @@
                             </table>
                             <p><b>Total Pembayaran Anda : </b> <b><?= 'Rp. ' . number_format($no_tiket->total_pembayaran, 0, ',', '.') ?> </b> </p>
                             <?php if ($no_tiket->status === '0') : ?>
-                                <p class="text-danger">Silakan Kirim Bukti Pembayaran Anda Disini!</p>
-                                <?= form_open_multipart('kirimKonfirmasi'); ?>
+                                <?= form_open_multipart('kirimKonfirmasi') ?>
                                 <input type="hidden" name="no_pembayaran" value="<?= $no_tiket->no_pembayaran ?>">
 
-                                <img id="img_gerbong" class="img-fluid mb-3" src="<?= base_url('assets/gerbong/gerbong1.jpg') ?>" style="width: 400px; display: block; margin-left: auto; margin-right: auto;">
+                                <img id="img_gerbong" class="img-fluid mb-3" src="" style="width: 400px; display: block; margin-left: auto; margin-right: auto;">
 
                                 <div class="form-group">
                                     <select class="form-control mt-3 theSelect" name="gerbong" id="select_gerbong" onchange="cekGerbong()" required>
-                                        <option disabled selected>Pilih Gerbong Anda</option>
+                                        <option selected value="0">Pilih Gerbong Anda</option>
                                         <option value="1">Gerbong 1</option>
                                         <option value="2">Gerbong 2</option>
                                         <option value="3">Gerbong 3</option>
@@ -70,7 +69,7 @@
 
                                 <div class="form-group">
                                     <select class="form-control theSelect" name="bagian" id="bagian" onchange="cekBagian()" required>
-                                        <option disabled selected>Pilih Bagian</option>
+                                        <option selected value="0">Pilih Bagian</option>
                                         <option value="a">A</option>
                                         <option value="b">B</option>
                                     </select>
@@ -93,10 +92,12 @@
                                         <?php endfor; ?>
                                     </select>
                                 </div>
+                                <br>
 
-
-                                <input type="file" name="gambar" class="form-control mt-3" required>
-                                <button type="submit" class="btn btn-outline-success mt-4 float-right">Kirim Bukti</button>
+                                <label class="text-danger">Silakan Kirim Bukti Pembayaran Anda Disini!</label>
+                                <input id="foto" type="file" name="gambar" class="form-control mt-2" required>
+                                <p class="d-none mt-3" id="pesan"></p>
+                                <button id="btn_konfirmasi" type="submit" class="btn btn-outline-success mt-4 btn-block">Kirim Bukti</button>
                                 <?= form_close(); ?>
                             <?php else : ?>
                             <?php endif; ?>
