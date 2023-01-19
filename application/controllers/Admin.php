@@ -88,7 +88,7 @@ class Admin extends CI_Controller
     {
         $remove = $this->M_Admin->delete_stasiun($id);
 
-        $this->session->set_flashdata('berhasil', '<div class="alert alert-succes alert-dismissible fade show" role="alert" style="width: 100%">
+        $this->session->set_flashdata('berhasil', '<div class="alert alert-success alert-dismissible fade show" role="alert" style="width: 100%">
             <strong>Berhasil!</strong> Data berhasil di busek bro
             </div>');
         redirect(base_url('admin/dashboard'));

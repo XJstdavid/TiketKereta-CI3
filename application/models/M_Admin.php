@@ -23,7 +23,9 @@ class M_Admin extends CI_Model
 
     public function delete_stasiun($id)
     {
-        $this->db->where('id', $id);
+
+        $row = $this->db->where('id', $id);
+
         return $this->db->delete('stasiun');
     }
 
