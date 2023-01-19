@@ -8,7 +8,6 @@
     <title><?= $judul ?></title>
     <link rel="icon" href="<?= base_url('assets/icon.jpg') ?>" sizes="25x25">
     <!-- CSS -->
-    <link rel="stylesheet" href="<?= base_url('assets/css/bootstrap.min.css') ?>">
     <link rel="stylesheet" href="<?= base_url('assets/css/bootstrap.css') ?>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/css/select2.min.css">
 </head>
