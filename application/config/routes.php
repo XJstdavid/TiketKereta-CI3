@@ -2,6 +2,7 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 
 // Route User / Guest
+$route['PilihGerbong'] = 'guest/PilihGerbong';
 $route['konfirmasi'] = 'guest/halamankonfirmasi';
 $route['kirimKonfirmasi'] = 'guest/kirimKonfirmasi';
 $route['cekKonfirmasi'] = 'guest/cekKonfirmasi';

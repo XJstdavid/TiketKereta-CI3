@@ -131,7 +131,7 @@
 
                                     <div class="form-group">
                                         <label>Harga</label>
-                                        <input type="number" name="harga" placeholder="Harga" class="form-control">
+                                        <input type="number" name="harga" placeholder="Harga" class="form-control" required>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="reset" class="btn btn-secondary" data-dismiss="modal">reset</button>

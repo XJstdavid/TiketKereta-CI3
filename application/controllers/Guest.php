@@ -130,6 +130,28 @@ class Guest extends CI_Controller
         redirect('konfirmasi?kode=' . $kode);
     }
 
+    public function PilihGerbong()
+    {
+        $kodenya = $this->input->post('kode');
+        $nama = $this->input->post('nama');
+
+        $kode = $this->M_Guest->GetPembayaranWhere($kodenya)->row();
+
+        $data = array(
+            'gerbong' => $this->input->post('gerbong'),
+            'bagian' => $this->input->post('bagian'),
+            'kursi' => $this->input->post('kursi'),
+        );
+
+        $update = $this->M_Guest->PilihGerbong($data, $kode->no_tiket, $nama);
+
+        if ($update) {
+            redirect('konfirmasi?kode=' . $kodenya);
+        } else {
+            echo "Gagal";
+        }
+    }
+
     public function kirimKonfirmasi()
     {
         // Uploading Gambar

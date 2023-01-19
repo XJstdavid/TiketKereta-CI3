@@ -22,16 +22,16 @@
             cekGerbong();
 
         <?php endif; ?>
+        var gambar = $('.img_gerbong');
+        var gerbong = $('.select_gerbong').val();
 
         function cekGerbong() {
-            var gambar = $('.img_gerbong');
-            var gerbong = $('.select_gerbong');
 
-            if (gerbong.val() === "1") {
+            if (gerbong === "1") {
                 gambar.attr('src', '<?= base_url('assets/gerbong/gerbong1.jpg') ?>');
-            } else if (gerbong.val() === "2") {
+            } else if (gerbong === "2") {
                 gambar.attr('src', '<?= base_url('assets/gerbong/gerbong2.jpg') ?>');
-            } else if (gerbong.val() === "3") {
+            } else if (gerbong === "3") {
                 gambar.attr('src', '<?= base_url('assets/gerbong/gerbong3.jpg') ?>');
             }
 
@@ -40,7 +40,7 @@
             var button = $('#btn_konfirmasi');
             var pesan = $('.pesan');
 
-            if (gerbong.val() === "0" || bagian === "0") {
+            if (gerbong === "0" || bagian === "0") {
                 button.attr("disabled", true);
                 pesan.removeClass('d-none');
                 pesan.text("Pastikan anda telah memilih Gerbong  & Bagian !!");
@@ -70,7 +70,7 @@
             var button = $('#btn_konfirmasi');
             var pesan = $('.pesan');
 
-            if (gerbong.val() === "0" || bagian === "0") {
+            if (gerbong === "0" || bagian === "0") {
                 button.attr("disabled", true);
                 pesan.removeClass('d-none');
                 pesan.text("Pastikan anda telah memilih Gerbong, Bagian, & No Kursi  !!");
