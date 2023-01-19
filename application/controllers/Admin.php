@@ -11,53 +11,12 @@ class Admin extends CI_Controller
             redirect('auth/login');
         }
     }
-    // public function halamanlogin()
-    // {
-    //     $this->load->view('admin/login');
-    // }
-
-    // public function login()
-    // {
-    //     $data = array(
-    //         'username' => $this->input->post('username'),
-    //         'password' => SHA1($this->input->post('password'))
-    //     );
-
-    //     $cek = $this->M_Admin->cekLogin($data);
-
-    //     if ($cek > 0) {
-    //         $sess = array(
-    //             'status' => true,
-    //             'level'  => 'admin'
-    //         );
-
-    //         // Set Seesion
-    //         $this->session->set_userdata($sess);
-
-    //         redirect(base_url('admin/dashboard'));
-    //     } else {
-    //         redirect(base_url('login'));
-    //     }
-    // }
-
-    // public function logout()
-    // {
-    //     session_destroy();
-
-    //     redirect(base_url());
-    // }
-
     public function halamanDashboard()
     {
         $data['judul']  = 'XKereta - Admin';
         $data['stasiun'] = $this->M_Admin->getDataStasiun()->result();
 
         $this->load->view('admin/dashboard', $data);
-        // if ($this->session->status === true) {
-        //     $this->load->view('admin/dashboard', $data);
-        // } else {
-        //     redirect(base_url('login'));
-        // }
     }
 
     public function tambah_stasiun()
@@ -78,6 +37,7 @@ class Admin extends CI_Controller
             $this->M_Admin->tambah_stasiun($data);
             $this->session->set_flashdata('berhasil', '<div class="alert alert-success alert-dismissible fade show" role="alert" style="width: 100%">
             <strong>Berhasil!</strong> Data berhasil ditambahkan
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>');
         }
 
@@ -89,7 +49,8 @@ class Admin extends CI_Controller
         $remove = $this->M_Admin->delete_stasiun($id);
 
         $this->session->set_flashdata('berhasil', '<div class="alert alert-success alert-dismissible fade show" role="alert" style="width: 100%">
-            <strong>Berhasil!</strong> Data berhasil di busek bro
+            <strong>Berhasil!</strong> Data telah di hapus
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>');
         redirect(base_url('admin/dashboard'));
     }
@@ -132,7 +93,8 @@ class Admin extends CI_Controller
 
         $update = $this->M_Admin->update_stasiun($data, $id);
         $this->session->set_flashdata('berhasil', '<div class="alert alert-success alert-dismissible fade show" role="alert" style="width: 100%">
-            <strong>Berhasil!</strong> Data berhasil di update
+            <strong>Berhasil!</strong> Data telah di update
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>');
 
         redirect(base_url('admin/dashboard'));
@@ -164,6 +126,7 @@ class Admin extends CI_Controller
             $this->M_Admin->tambah_jadwal($data);
             $this->session->set_flashdata('berhasil', '<div class="alert alert-success alert-dismissible fade show" role="alert" style="width: 100%">
         <strong>Berhasil!</strong> Data berhasil di tambahkan
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>');
         }
 
@@ -174,7 +137,8 @@ class Admin extends CI_Controller
     {
         $remove = $this->M_Admin->hapusJadwal($id);
         $this->session->set_flashdata('berhasil', '<div class="alert alert-succes alert-dismissible fade show" role="alert" style="width: 100%">
-            <strong>Berhasil!</strong> Data berhasil di busek
+            <strong>Berhasil!</strong> Data telah di hapus
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>');
         redirect(base_url('admin/dashboard/kelola-jadwal'));
     }
@@ -200,8 +164,32 @@ class Admin extends CI_Controller
 
         $this->M_Admin->edit_jadwal($data);
         $this->session->set_flashdata('berhasil', '<div class="alert alert-success alert-dismissible fade show" role="alert" style="width: 100%">
-            <strong>Berhasil!</strong> Data berhasil di update
+            <strong>Berhasil!</strong> Data telah di update
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>');
         redirect(base_url('admin/dashboard/kelola-jadwal'));
+    }
+
+    public function halamanKonfirmasi()
+    {
+        $data['judul']  = 'XKereta - Admin';
+        $data['list']   = $this->M_Admin->getKonfirmasiPembayaran()->result();
+
+        $this->load->view('admin/konfirmasi_pembayaran', $data);
+    }
+
+    public function verifikasiPembayaran($id)
+    {
+        $update = $this->M_Admin->updatePembayaran($id);
+
+        if ($update) {
+            $this->session->set_flashdata('berhasil', '<div class="alert alert-success alert-dismissible fade show" role="alert" style="width: 100%">
+            <strong>Berhasil!</strong> Data Pembayaran Telah Di Verikasi
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>');
+            redirect('admin/konfirmasi-pembayaran');
+        } else {
+            echo "Gagal";
+        }
     }
 }

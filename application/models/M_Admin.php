@@ -3,12 +3,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class M_Admin extends CI_Model
 {
-    // public function cekLogin($data)
-    // {
-    //     // return $this->db->where($data)->count_all_results();
-    //     return $this->db->where('admin', $data);
-    //     // echo $data->num_rows();
-    // }
 
     public function getDataStasiun()
     {
@@ -80,5 +74,22 @@ class M_Admin extends CI_Model
     {
         $this->db->where('id', $this->input->post('id'));
         return $this->db->update('jadwal', $data);
+    }
+
+    public function getKonfirmasiPembayaran()
+    {
+        $where = array(
+            'status' => 1,
+        );
+        return $this->db->get_where('pembayaran', $where);
+    }
+
+    public function updatePembayaran($id)
+    {
+        $data = array(
+            'status' => 2,
+        );
+        $this->db->where('id', $id);
+        return $this->db->update('pembayaran', $data);
     }
 }

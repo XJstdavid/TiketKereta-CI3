@@ -24,12 +24,14 @@ class Auth extends CI_Controller
 
         if ($this->auth_model->login($username, $password)) {
             $this->session->set_flashdata('pesan', '<div style="width:100%" class="alert alert-success alert-dismissible fade show" role="alert">
-        <strong>Berhasil!</strong> Berhasil Masuk, Selamat Datang Admin
+        <strong>Berhasil!</strong>Masuk, Selamat Datang Admin
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>');
             redirect('admin');
         } else {
             $this->session->set_flashdata('message_login_error', '<div style="height: 65px" class="alert alert-danger fade show" role="alert">
             <strong>Gagal!</strong> username atau password salah!
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>');
         }
 
@@ -42,7 +44,8 @@ class Auth extends CI_Controller
         $this->load->model('auth_model');
         $this->auth_model->logout();
         $this->session->set_flashdata('pesan', '<div style="width:100%" class="alert alert-success alert-dismissible fade show" role="alert">
-        <strong>Berhasil!</strong> Berhasil Keluar
+        <strong>Berhasil!</strong> Keluar 
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>');
         redirect(site_url('auth/login'));
     }

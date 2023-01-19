@@ -18,123 +18,104 @@
 
 <body>
 
-    <body id="body-pd">
-        <header class="header" id="header">
-            <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> </div>
-        </header>
-        <div class="l-navbar" id="nav-bar">
-            <nav class="nav">
-                <div>
-                    <a href="<?= base_url() ?>" class="nav_logo">
-                        <i class="bi bi-train-front-fill" style="color: white;"></i>
-                        <span class="nav_logo-name">Admin Panel</span> </a>
-                    <div class="nav_list">
-                        <a href="<?= base_url('admin/dashboard') ?>" class="nav_link active"><i class="bi bi-clipboard-data-fill"></i><span class="nav_name">Data Stasiun</span></a>
-                        <a href="<?= base_url('admin/dashboard/kelola-jadwal') ?>" class="nav_link">
-                            <i class="bi bi-clipboard-data-fill"></i> <span class="nav_name">Data Jadwal</span>
-                        </a>
-                    </div>
-                </div>
-                <a href="<?= base_url('auth/logout') ?>" class="nav_link"> <i class='bx bx-log-out nav_icon'></i> <span class="nav_name">SignOut</span> </a>
-            </nav>
-        </div>
-        <!--Container Main start-->
-        <div class="container-fluid my-5">
-            <div class="row">
+    <?php include 'include/nav.php' ?>
+    <!--Container Main start-->
+    <div class="container-fluid my-5">
+        <div class="row">
 
-                <div class="col-md-12 mt-4">
-                    <div class="card">
-                        <div class="card-header bg-primary text-white text-center" style="margin-bottom: 10px;">Daftar Stasiun</div>
-                        <?= $this->session->flashdata('pesan') ?>
-                        <div class="col-md-12 mt-3">
-                            <a class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#exampleModal" style="margin-left: 10px; margin-bottom: 10px;">Tambah Data Stasiun</a>
-                            <br>
-                            <?= $this->session->flashdata('berhasil'); ?>
-                        </div>
-                        <div class="card-body">
-                            <table id="data" class="display table table-bordered table-sm">
-                                <thead>
+            <div class="col-md-12 mt-4">
+                <div class="card">
+                    <div class="card-header bg-primary text-white text-center" style="margin-bottom: 10px;">Daftar Stasiun</div>
+                    <?= $this->session->flashdata('pesan') ?>
+                    <div class="col-md-12 mt-3">
+                        <a class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#exampleModal" style="margin-left: 10px; margin-bottom: 10px;">Tambah Data Stasiun</a>
+                        <br>
+                        <?= $this->session->flashdata('berhasil'); ?>
+                    </div>
+                    <div class="card-body">
+                        <table id="data" class="display table table-bordered table-sm">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Nama Stasiun</th>
+                                    <th>Gambar</th>
+                                    <th>Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php $no = 1;
+                                foreach ($stasiun as $st) { ?>
                                     <tr>
-                                        <th>No</th>
-                                        <th>Nama Stasiun</th>
-                                        <th>Gambar</th>
-                                        <th>Aksi</th>
+                                        <td><?= $no++ ?></td>
+                                        <td><?= $st->nama_stasiun ?></td>
+                                        <td><img style="width: 200px" src="<?php echo $st->image; ?>"></td>
+                                        <td>
+                                            <div class="d-flex">
+                                                <a href="<?= base_url('admin/dashboard/edit/' . $st->id) ?>" class="btn btn-outline-warning btn-sm" style="margin-left: 10px;"><i class="fa-solid fa-pen-to-square"></i></a>
+                                                <a href="<?= base_url('hapusStasiun/' . $st->id) ?>" class="delete btn btn-outline-danger btn-sm" style="margin-left: 10px;"><i class=" fa-solid fa-trash"></i></a>
+                                            </div>
+                                        </td>
                                     </tr>
-                                </thead>
-                                <tbody>
-                                    <?php $no = 1;
-                                    foreach ($stasiun as $st) { ?>
-                                        <tr>
-                                            <td><?= $no++ ?></td>
-                                            <td><?= $st->nama_stasiun ?></td>
-                                            <td><img style="width: 200px" src="<?php echo $st->image; ?>"></td>
-                                            <td>
-                                                <div class="d-flex">
-                                                    <a href="<?= base_url('admin/dashboard/edit/' . $st->id) ?>" class="btn btn-outline-warning btn-sm" style="margin-left: 10px;"><i class="fa-solid fa-pen-to-square"></i></a>
-                                                    <a href="<?= base_url('hapusStasiun/' . $st->id) ?>" class="delete btn btn-outline-danger btn-sm" style="margin-left: 10px;"><i class=" fa-solid fa-trash"></i></a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    <?php } ?>
-                                </tbody>
-                            </table>
+                                <?php } ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Form Tambah Data Stasiun</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" method="post" action="<?php echo base_url('tambahStasiun') ?>" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label>Nama Stasiun</label>
+                            <input type="text" class="form-control" name="stasiun" placeholder="Nama Stasiun">
                         </div>
-                    </div>
+                        <div class="form-group">
+                            <label>Upload Gambar</label>
+                            <input type="file" class="form-control" name="image" placeholder="Gambar Stasiun" accept="image/" onchange="loadFile(event)">
+                            <br>
+                            <img id="output" width="200" src="https://st4.depositphotos.com/14953852/22772/v/600/depositphotos_227725052-stock-illustration-image-available-icon-flat-vector.jpg" class="center">
+                            <br>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" name="submit" class="btn btn-primary">Tambah Stasiun</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
-
-
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Form Tambah Data Stasiun</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form class="form-horizontal" method="post" action="<?php echo base_url('tambahStasiun') ?>" enctype="multipart/form-data">
-                            <div class="form-group">
-                                <label>Nama Stasiun</label>
-                                <input type="text" class="form-control" name="stasiun" placeholder="Nama Stasiun">
-                            </div>
-                            <div class="form-group">
-                                <label>Upload Gambar</label>
-                                <input type="file" class="form-control" name="image" placeholder="Gambar Stasiun" accept="image/" onchange="loadFile(event)">
-                                <br>
-                                <img id="output" width="200" src="https://st4.depositphotos.com/14953852/22772/v/600/depositphotos_227725052-stock-illustration-image-available-icon-flat-vector.jpg" class="center">
-                                <br>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="submit" name="submit" class="btn btn-primary">Tambah Stasiun</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-        </div>
-        <!--Container Main end-->
+    </div>
+    </div>
+    <!--Container Main end-->
 
 
 
-        <!-- Script JS -->
-        <script src="<?= base_url('assets/js/costum.js') ?>"></script>
-        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
-        <script src="https://kit.fontawesome.com/ff4c215153.js" crossorigin="anonymous"></script>
+    <!-- Script JS -->
+    <script src="<?= base_url('assets/js/costum.js') ?>"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/ff4c215153.js" crossorigin="anonymous"></script>
 
-        <!-- datatable -->
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
-        <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/jszip-2.5.0/dt-1.13.1/af-2.5.1/b-2.3.3/b-colvis-2.3.3/b-html5-2Z3.3/b-print-2.3.3/sb-1.4.0/datatables.min.js"></script>
-        <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-        <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
-        <script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js"></script>
+    <!-- datatable -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/jszip-2.5.0/dt-1.13.1/af-2.5.1/b-2.3.3/b-colvis-2.3.3/b-html5-2Z3.3/b-print-2.3.3/sb-1.4.0/datatables.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js"></script>
 
-    </body>
+</body>
 
 </html>
 

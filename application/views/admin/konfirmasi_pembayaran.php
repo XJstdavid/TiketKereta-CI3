@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= $judul; ?> | Edit Data Stasiun </title>
+    <title><?= $judul; ?> | Konfirmasi Pembayaran</title>
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <link href='<?= base_url('assets/css/costum.css') ?>' rel='stylesheet'>
 
@@ -24,26 +24,48 @@
         <div class="container-fluid">
             <div class="row">
 
+
+
                 <div class="container-fluid my-5">
-                    <div class="row justify-content-center">
-                        <div class="col-md-4 mt-4">
+                    <div class="row">
+                        <div class="col-md-12 mt-4">
+                            <?= $this->session->flashdata('berhasil'); ?>
                             <div class="card">
-                                <div class="card-header bg-primary text-white text-center">Edit Data Stasiun</div>
-                                <div class="card-body">
-                                    <form action="<?= base_url('editStasiun') ?>" method="post" enctype="multipart/form-data">
-                                        <input type="hidden" name="id" value="<?= $data_stasiun->id; ?>">
-                                        <div class="form-group">
-                                            <label>Nama Stasiun</label>
-                                            <input type="text" name="nama_stasiun" class="form-control" value="<?= $data_stasiun->nama_stasiun; ?>">
+                                <div class="card-header bg-primary text-white text-center">Invoice Pelanggan</div>
+                                <div class="col-md-12 mt-3">
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th>No Pembayaran</th>
+                                                        <th>No Tiket</th>
+                                                        <th>Total Pembayaran</th>
+                                                        <th>Bukti Pembayaran</th>
+                                                        <th>Aksi</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <?php foreach ($list as $li) : ?>
+                                                        <tr>
+                                                            <td><?= $li->no_pembayaran ?></td>
+                                                            <td><?= $li->no_tiket ?></td>
+                                                            <td><?= $li->total_pembayaran ?></td>
+                                                            <td>
+                                                                <a href="<?= base_url('assets/bukti/' . $li->bukti) ?>" target="_blank">
+                                                                    <img width="25%" src="<?= base_url('assets/bukti/' . $li->bukti) ?>">
+                                                                </a>
+                                                            </td>
+                                                            <td>
+
+                                                                <a href="<?= base_url('verifikasi/' . $li->id) ?>" class="konfirmasi btn btn-outline-success"><i class="bi bi-patch-check-fill"></i></a>
+                                                            </td>
+                                                        </tr>
+                                                    <?php endforeach; ?>
+                                                </tbody>
+                                            </table>
                                         </div>
-                                        <div class="form-group">
-                                            <label>Upload Gambar</label>
-                                            <input type="file" class="form-control" name="image" placeholder="Gambar Stasiun" accept="image/" onchange="loadFile(event)">
-                                            <br>
-                                            <img id="output" width="200" src="<?= $data_stasiun->image ?>" class="center">
-                                        </div>
-                                        <button class="btn btn-outline-warning btn-block mt-3">Update</button>
-                                    </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -98,14 +120,28 @@
     </script>
 
     <script>
-        var loadFile = function(event) {
-            var reader = new FileReader();
-            reader.onload = function() {
-                var output = document.getElementById('output');
-                output.src = reader.result;
-            };
-            reader.readAsDataURL(event.target.files[0]);
-        };
+        $(document).ready(function() {
+            $(".konfirmasi").click(function(e) {
+                e.preventDefault();
+                const href = $(this).attr('href');
+
+                Swal.fire({
+                    title: 'Apakah Kamu Yakin Ingin Verikasi No Pembayaan <?= $li->no_pembayaran; ?>?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Verifikasi!',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+
+                        if (result.value) {
+                            document.location.href = href;
+                        }
+                    }
+                })
+            });
+        });
     </script>
 
     <script>

@@ -70,7 +70,6 @@ class M_Guest extends CI_Model
     {
         $data  = array(
             'bukti' => $nama,
-            'status' => 1,
         );
         $this->db->where('no_pembayaran', $no);
         return $this->db->update('pembayaran', $data);
