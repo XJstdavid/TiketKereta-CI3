@@ -3,8 +3,8 @@
         <div class="row">
             <div class="col-md-8">
                 <br> <br> <br> <br>
-                <h1 class="display-4">Selamat Datang Di XKereta</h1>
-                <p class="lead">Website Pembelian Tiket Kereta Dengan Mudah.</p>
+                <h1 class="display-4 text-white">Selamat Datang Di XKereta</h1>
+                <p class="lead text-white">Website Pembelian Tiket Kereta Dengan Mudah.</p>
             </div>
             <div class="col-md-4">
                 <form action="<?= base_url('cariTiket') ?>" method="post">
