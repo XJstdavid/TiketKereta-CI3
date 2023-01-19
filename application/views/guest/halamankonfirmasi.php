@@ -22,6 +22,7 @@
             </div>
             <hr>
             <?php if (isset($_GET['kode'])) : ?>
+                <h4>Kode Booking : <?= $_GET['kode'] ?></h4>
                 <div class="card">
                     <div class="card-header bg-primary text-white text-center">
                         Detail Pembayaran Anda
@@ -30,8 +31,10 @@
                         <h3 class="text-center">
                             <?php if ($no_tiket->status === '0') : ?>
                                 <i class="fa fa-times text-danger"></i> Belum Melakukan Pembayaran
-                            <?php else : ?>
-                                <i class="fa fa-check text-success"></i> Pembayaran Sukses
+                            <?php elseif ($no_tiket->status === '1') : ?>
+                                <i class="fa fa-hourglass-half text-warning"></i></i> Pembayaran Menunggu Verikasi
+                            <?php elseif ($no_tiket->status === '2') : ?>
+                                <i class="fa fa-check text-success"></i> Pembayaran Telah Di Verikasi
                             <?php endif; ?>
                         </h3>
                         <div class="table-responsive">
