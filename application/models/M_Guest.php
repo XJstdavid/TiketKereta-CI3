@@ -99,6 +99,8 @@ class M_Guest extends CI_Model
         $this->db->where('gerbong', $gerbong);
         $this->db->where('bagian', $bagian);
         $this->db->where('kursi', $kursi);
+        $this->db->where('tiket.id_jadwal', $id_jadwal);
+        $this->db->join('tiket', 'tiket.nomor_tiket=penumpang.nomor_tiket');
         return $this->db->get('penumpang');
     }
 }

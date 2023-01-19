@@ -148,7 +148,7 @@ class Guest extends CI_Controller
             'kursi' => $kursi,
         );
 
-        // cek validasi kursi
+        // validasi kursi
         $tiket = $this->M_Guest->getTiketWhere($kode->no_tiket)->row();
         $cek = $this->M_Guest->validasiGerbong($gerbong, $bagian, $kursi, $tiket->id_jadwal)->num_rows();
 

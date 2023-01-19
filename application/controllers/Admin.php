@@ -159,7 +159,8 @@ class Admin extends CI_Controller
             'tujuan' => $this->input->post('tujuan'),
             'tgl_berangkat' => $this->input->post('tgl_berangkat'),
             'tgl_sampai' => $this->input->post('tgl_sampai'),
-            'kelas' => $this->input->post('kelas')
+            'kelas' => $this->input->post('kelas'),
+            'harga' => $this->input->post('harga'),
         );
 
         $this->M_Admin->edit_jadwal($data);

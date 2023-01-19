@@ -91,6 +91,11 @@
                                             </select>
                                         </div>
 
+                                        <div class="form-group">
+                                            <label>Hargas</label>
+                                            <input type="text" name="harga" class="form-control" required value="<?= $data_edit->harga ?>">
+                                        </div>
+
                                         <button class="btn btn-outline-warning btn-block mt-3">Update</button>
                                     </form>
                                 </div>
