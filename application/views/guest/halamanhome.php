@@ -13,7 +13,7 @@
                         <div class="form-group">
                             <label>Stasiun Asal</label>
                             <select name="asal" class="form-control theSelect">
-                                <option value="">Stasiun Asal</option>
+                                <option disabled selected>Stasiun Asal</option>
                                 <?php foreach ($stasiun as $st) : ?>
                                     <option value="<?= $st->id; ?>"><?= $st->nama_stasiun; ?></option>
                                 <?php endforeach; ?>
@@ -22,7 +22,7 @@
                         <div class="form-group">
                             <label>Stasiun Tujuan</label>
                             <select name="tujuan" class="form-control theSelect">
-                                <option value="">Stasiun Tujuan</option>
+                                <option disabled selected>Stasiun Tujuan</option>
                                 <?php foreach ($stasiun as $st) : ?>
                                     <option value="<?= $st->id; ?>"><?= $st->nama_stasiun; ?></option>
                                 <?php endforeach; ?>
@@ -35,7 +35,7 @@
                         <div class="form-group">
                             <label>Jumlah Penumpang</label>
                             <select name="jumlah" class="form-control">
-                                <option value="">Jumlah Penumpang</option>
+                                <option disabled selected>Jumlah Penumpang</option>
                                 <?php for ($i = 1; $i <= 5; $i++) : ?>
                                     <option value="<?= $i ?>"><?= $i ?> Penumpang</option>
                                 <?php endfor; ?>

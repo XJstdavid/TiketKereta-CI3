@@ -23,7 +23,7 @@
             <hr>
             <?php if (isset($_GET['kode'])) : ?>
                 <div class="card">
-                    <div class="card-header">
+                    <div class="card-header bg-primary text-white text-center">
                         Detail Pembayaran Anda
                     </div>
                     <div class="card-body">
@@ -52,12 +52,54 @@
                                 </tbody>
                             </table>
                             <p><b>Total Pembayaran Anda : </b> <b><?= 'Rp. ' . number_format($no_tiket->total_pembayaran, 0, ',', '.') ?> </b> </p>
-                            <p class="text-danger">Silakan Kirim Bukti Pembayaran Anda Disini!</p>
-                            <?= form_open_multipart('kirimKonfirmasi'); ?>
-                            <input type="hidden" name="no_pembayaran" value="<?= $no_tiket->no_pembayaran ?>">
-                            <input type="file" name="gambar" class="form-control">
-                            <button type="submit" class="btn btn-outline-success mt-3 float-right">Kirim Bukti</button>
-                            <?= form_close(); ?>
+                            <?php if ($no_tiket->status === '0') : ?>
+                                <p class="text-danger">Silakan Kirim Bukti Pembayaran Anda Disini!</p>
+                                <?= form_open_multipart('kirimKonfirmasi'); ?>
+                                <input type="hidden" name="no_pembayaran" value="<?= $no_tiket->no_pembayaran ?>">
+
+                                <img id="img_gerbong" class="img-fluid mb-3" src="<?= base_url('assets/gerbong/gerbong1.jpg') ?>" style="width: 400px; display: block; margin-left: auto; margin-right: auto;">
+
+                                <div class="form-group">
+                                    <select class="form-control mt-3 theSelect" name="gerbong" id="select_gerbong" onchange="cekGerbong()" required>
+                                        <option disabled selected>Pilih Gerbong Anda</option>
+                                        <option value="1">Gerbong 1</option>
+                                        <option value="2">Gerbong 2</option>
+                                        <option value="3">Gerbong 3</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <select class="form-control theSelect" name="bagian" id="bagian" onchange="cekBagian()" required>
+                                        <option disabled selected>Pilih Bagian</option>
+                                        <option value="a">A</option>
+                                        <option value="b">B</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <select class="form-control theSelect" name="kursi" id="bagian_a" required>
+                                        <option disabled selected>Pilih No Kursi</option>
+                                        <?php for ($i = 1; $i <= 29; $i++) : ?>
+                                            <option value="<?= $i; ?>"><?= $i; ?></option>
+                                        <?php endfor; ?>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <select class="form-control theSelect" name="kursi" id="bagian_b" required>
+                                        <option disabled selected>Pilih No Kursi</option>
+                                        <?php for ($i = 1; $i <= 20; $i++) : ?>
+                                            <option value="<?= $i; ?>"><?= $i; ?></option>
+                                        <?php endfor; ?>
+                                    </select>
+                                </div>
+
+
+                                <input type="file" name="gambar" class="form-control mt-3" required>
+                                <button type="submit" class="btn btn-outline-success mt-4 float-right">Kirim Bukti</button>
+                                <?= form_close(); ?>
+                            <?php else : ?>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>

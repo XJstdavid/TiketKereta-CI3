@@ -75,4 +75,10 @@ class M_Guest extends CI_Model
         $this->db->where('no_pembayaran', $no);
         return $this->db->update('pembayaran', $data);
     }
+
+    public function PilihKursi($data, $no)
+    {
+        $this->db->where('no_pembayaran', $no);
+        return $this->db->update('pembayaran', $data);
+    }
 }

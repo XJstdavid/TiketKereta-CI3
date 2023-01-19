@@ -140,6 +140,7 @@ class Guest extends CI_Controller
 
     public function kirimKonfirmasi()
     {
+        // Uploading Gambar
         $config['upload_path']          = './assets/bukti/';
         $config['allowed_types']        = 'jpg|png';
         $config['max_size']             = 5020;
@@ -164,5 +165,14 @@ class Guest extends CI_Controller
             </div>');
             redirect('konfirmasi');
         }
+
+        // Pemilhan Kursi
+        $data = array(
+            'gerbong' => $this->input->post('gerbong'),
+            'bagian' => $this->input->post('bagian'),
+            'kursi' => $this->input->post('kursi'),
+        );
+
+        $this->M_Guest->PilihKursi($data, $no);
     }
 }
