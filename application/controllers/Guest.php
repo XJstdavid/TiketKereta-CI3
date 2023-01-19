@@ -137,13 +137,30 @@ class Guest extends CI_Controller
 
         $kode = $this->M_Guest->GetPembayaranWhere($kodenya)->row();
 
+        // deklarasi
+        $gerbong = $this->input->post('gerbong');
+        $bagian = $this->input->post('bagian');
+        $kursi = $this->input->post('kursi');
+
         $data = array(
-            'gerbong' => $this->input->post('gerbong'),
-            'bagian' => $this->input->post('bagian'),
-            'kursi' => $this->input->post('kursi'),
+            'gerbong' => $gerbong,
+            'bagian' => $bagian,
+            'kursi' => $kursi,
         );
 
-        $update = $this->M_Guest->PilihGerbong($data, $kode->no_tiket, $nama);
+        // cek validasi kursi
+        $tiket = $this->M_Guest->getTiketWhere($kode->no_tiket)->row();
+        $cek = $this->M_Guest->validasiGerbong($gerbong, $bagian, $kursi, $tiket->id_jadwal)->num_rows();
+
+        if ($cek > 0) { // jika ada
+            $this->session->set_flashdata('alert', '<div class="alert alert-danger alert-dismissible fade show" role="alert" style="width: 100%">
+            <strong>Warning!</strong> Maaf Gerbong, Bagian & Kursi Sudah Tidak Tersedia
+            </div>');
+            redirect('konfirmasi?kode=' . $kodenya);
+        } else { // jika tidak ada
+            $update = $this->M_Guest->PilihGerbong($data, $kode->no_tiket, $nama);
+        }
+
 
         if ($update) {
             redirect('konfirmasi?kode=' . $kodenya);

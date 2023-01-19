@@ -37,6 +37,12 @@
                                 <i class="fa fa-check text-success"></i> Pembayaran Telah Di Verikasi
                             <?php endif; ?>
                         </h3>
+                        <?php if ($this->session->flashdata('alert') !== null) : ?>
+
+                            <?= $this->session->flashdata('alert'); ?>
+
+
+                        <?php endif; ?>
                         <div class="table-responsive">
                             <table class="table table-bordered">
                                 <thead>

@@ -88,4 +88,17 @@ class M_Guest extends CI_Model
         $this->db->where('nama', $nama);
         return $this->db->update('penumpang', $data);
     }
+
+    public function getTiketWhere($tiket)
+    {
+        return $this->db->get_where('tiket', array('nomor_tiket' => $tiket));
+    }
+
+    public function validasiGerbong($gerbong, $bagian, $kursi, $id_jadwal)
+    {
+        $this->db->where('gerbong', $gerbong);
+        $this->db->where('bagian', $bagian);
+        $this->db->where('kursi', $kursi);
+        return $this->db->get('penumpang');
+    }
 }

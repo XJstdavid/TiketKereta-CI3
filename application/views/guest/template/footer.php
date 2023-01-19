@@ -62,9 +62,13 @@
             if (bagian.val() === "a") {
                 bagian_a.show();
                 bagian_b.hide();
+                bagian_a.attr('name', 'kursi');
+                bagian_b.removeAttr('name');
             } else if (bagian.val() === "b") {
-                bagian_a.hide();
                 bagian_b.show();
+                bagian_a.hide();
+                bagian_b.attr('name', 'kursi');
+                bagian_a.removeAttr('name');
             }
 
             // Cek validasi
