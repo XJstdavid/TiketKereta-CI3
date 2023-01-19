@@ -17,40 +17,42 @@
         $('.bagian_b').hide();
 
         <?php if ($this->uri->segment(1) === "konfirmasi") : ?>
+            $(document).ready(function() {
 
-            cekBagian();
-            cekGerbong();
+                cekBagian();
+                $("select.select_gerbong").change(function() {
+                    var gerbong = $(thi).children("option:selected").val();
+
+                    if (gerbong === "1") {
+                        gambar.attr('src', '<?= base_url('assets/gerbong/gerbong1.jpg') ?>');
+                    } else if (gerbong === "2") {
+                        gambar.attr('src', '<?= base_url('assets/gerbong/gerbong2.jpg') ?>');
+                    } else if (gerbong === "3") {
+                        gambar.attr('src', '<?= base_url('assets/gerbong/gerbong3.jpg') ?>');
+                    }
+
+                    // Cek validasi
+                    var bagian = $('.bagian').val();
+                    var button = $('#btn_konfirmasi');
+                    var pesan = $('.pesan');
+
+                    if (gerbong === "0" || bagian === "0") {
+                        button.attr("disabled", true);
+                        pesan.removeClass('d-none');
+                        pesan.text("Pastikan anda telah memilih Gerbong  & Bagian !!");
+                        pesan.addClass('text-danger');
+                    } else {
+                        button.attr("disabled", false);
+                        pesan.addClass('d-none');
+                        pesan.removeClass('text-danger');
+                    }
+                });
+            });
+
 
         <?php endif; ?>
         var gambar = $('.img_gerbong');
-        var gerbong = $('.select_gerbong').val();
-
-        function cekGerbong() {
-
-            if (gerbong === "1") {
-                gambar.attr('src', '<?= base_url('assets/gerbong/gerbong1.jpg') ?>');
-            } else if (gerbong === "2") {
-                gambar.attr('src', '<?= base_url('assets/gerbong/gerbong2.jpg') ?>');
-            } else if (gerbong === "3") {
-                gambar.attr('src', '<?= base_url('assets/gerbong/gerbong3.jpg') ?>');
-            }
-
-            // Cek validasi
-            var bagian = $('.bagian').val();
-            var button = $('#btn_konfirmasi');
-            var pesan = $('.pesan');
-
-            if (gerbong === "0" || bagian === "0") {
-                button.attr("disabled", true);
-                pesan.removeClass('d-none');
-                pesan.text("Pastikan anda telah memilih Gerbong  & Bagian !!");
-                pesan.addClass('text-danger');
-            } else {
-                button.attr("disabled", false);
-                pesan.addClass('d-none');
-                pesan.removeClass('text-danger');
-            }
-        }
+        var gerbong = $('.ssselect_gerbong').val();
 
         function cekBagian() {
             var bagian = $('.bagian');

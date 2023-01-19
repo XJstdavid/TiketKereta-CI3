@@ -179,14 +179,5 @@ class Guest extends CI_Controller
             </div>');
             redirect('konfirmasi');
         }
-
-        // Pemilhan Kursi
-        $data = array(
-            'gerbong' => $this->input->post('gerbong'),
-            'bagian' => $this->input->post('bagian'),
-            'kursi' => $this->input->post('kursi'),
-        );
-
-        $this->M_Guest->PilihKursi($data, $no);
     }
 }

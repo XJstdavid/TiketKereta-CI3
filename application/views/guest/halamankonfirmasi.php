@@ -46,6 +46,7 @@
                                         <th>Gerbong</th>
                                         <th>Bagian</th>
                                         <th>Kursi</th>
+                                        <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -53,27 +54,17 @@
                                         <tr>
                                             <td><?= $dt->nama ?></td>
                                             <td><?= $dt->no_identitas ?></td>
+                                            <td><?= $dt->gerbong ?></td>
+                                            <td><?= $dt->bagian ?></td>
+                                            <td><?= $dt->kursi ?></td>
                                             <td>
-                                                <?php if ($dt->gerbong === null) : ?>
+                                                <?php if ($dt->gerbong === null || $dt->bagian === null || $dt->kursi === null) : ?>
                                                     <a class="btn btn-sm btn-outline-warning" href="" data-toggle="modal" data-target="#pilihGerbong<?= $dt->id ?>">Pilih</a>
                                                 <?php else : ?>
-                                                    <?= $dt->gerbong ?><a class="btn btn-sm btn-outline-info ml-2" href="" data-toggle="modal" data-target="#gantiGerbong<?= $dt->id ?>">Ganti</a>
+                                                    <a class="btn btn-sm btn-outline-info ml-2" href="" data-toggle="modal" data-target="#gantiGerbong<?= $dt->id ?>">Ganti</a>
                                                 <?php endif; ?>
                                             </td>
-                                            <td>
-                                                <?php if ($dt->bagian === null) : ?>
-                                                    <a class="btn btn-sm btn-outline-warning" href="" data-toggle="modal" data-target="#pilihGerbong<?= $dt->id ?>">Pilih</a>
-                                                <?php else : ?>
-                                                    <?= $dt->bagian ?><a class="btn btn-sm btn-outline-info ml-2" href="" data-toggle="modal" data-target="#gantiGerbong<?= $dt->id ?>">Ganti</a>
-                                                <?php endif; ?>
-                                            </td>
-                                            <td>
-                                                <?php if ($dt->kursi === null) : ?>
-                                                    <a class="btn btn-sm btn-outline-warning" href="" data-toggle="modal" data-target="#pilihGerbong<?= $dt->id ?>">Pilih</a>
-                                                <?php else : ?>
-                                                    <?= $dt->kursi ?><a class="btn btn-sm btn-outline-info ml-2" href="" data-toggle="modal" data-target="#gantiGerbong<?= $dt->id ?>">Ganti</a>
-                                                <?php endif; ?>
-                                            </td>
+                                            <td></td>
                                         </tr>
 
                                         <?php if ($dt->gerbong !== null && $dt->kursi !== null && $dt->bagian !== null) : ?>
@@ -88,87 +79,94 @@
                                                                 <span aria-hidden="true">&times;</span>
                                                             </button>
                                                         </div>
-                                                        <div class="modal-body">
-                                                            <img class="img-fluid mb-3 img_gerbong" src="" style="width: 400px; display: block; margin-left: auto; margin-right: auto;">
 
-                                                            <div class="form-group">
-                                                                <select class="form-control mt-3 theSelect select_gerbong" name="gerbong" onchange="cekGerbong()" required>
-                                                                    <option value="0">Pilih Gerbong Anda</option>
+                                                        <form action="<?= base_url('PilihGerbong') ?>" method="post">
+                                                            <input type="hidden" name="kode" value="<?= $_GET['kode'] ?>">
+                                                            <input type="hidden" name="nama" value="<?= $dt->nama ?>">
 
-                                                                    <?php for ($i = 1; $i <= 3; $i++) : ?>
-                                                                        <?php
+                                                            <div class="modal-body">
 
-                                                                        if ($dt->gerbong == $i) :
-                                                                            $select = 'selected';
-                                                                        else :
-                                                                            $select = '';
-                                                                        endif;
-                                                                        ?>
+                                                                <img class="img-fluid mb-3 img_gerbong" style="width: 400px; display: block; margin-left: auto; margin-right: auto;">
 
-                                                                        <option <?= $select ?> value="<?= $i ?>">Gerbong <?= $i ?></option>
+                                                                <div class="form-group">
+                                                                    <select class="form-control mt-3 theSelect select_gerbong" name="gerbong" required>
+                                                                        <option value="0">Pilih Gerbong Anda</option>
 
-                                                                    <?php endfor; ?>
-                                                                </select>
+                                                                        <?php for ($i = 1; $i <= 3; $i++) : ?>
+                                                                            <?php
+
+                                                                            if ($dt->gerbong == $i) :
+                                                                                $select = 'selected';
+                                                                            else :
+                                                                                $select = '';
+                                                                            endif;
+                                                                            ?>
+
+                                                                            <option <?= $select ?> value="<?= $i ?>">Gerbong <?= $i ?></option>
+
+                                                                        <?php endfor; ?>
+                                                                    </select>
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <select class="form-control theSelect bagian" name="bagian" onchange="cekBagian()" required>
+                                                                        <option value="0">Pilih Bagian</option>
+
+                                                                        <?php for ($i = 'a'; $i <= 'b'; $i++) : ?>
+                                                                            <?php
+
+                                                                            if ($dt->bagian === $i) :
+                                                                                $select = 'selected';
+                                                                            else :
+                                                                                $select = '';
+                                                                            endif;
+                                                                            ?>
+
+                                                                            <option <?= $select ?> value="<?= $i ?>">Bagian <?= $i ?></option>
+
+                                                                        <?php endfor; ?>
+                                                                    </select>
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <select class="form-control theSelect bagian_a" name="kursi" required>
+                                                                        <?php for ($i = 1; $i <= 29; $i++) : ?>
+
+                                                                            <?php
+                                                                            if ($dt->kursi == $i) :
+                                                                                $select = 'selected';
+                                                                            else :
+                                                                                $select = '';
+                                                                            endif;
+                                                                            ?>
+
+                                                                            <option <?= $select ?> value="<?= $i ?>"> <?= $i ?></option>
+                                                                        <?php endfor; ?>
+                                                                    </select>
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                    <select class="form-control theSelect bagian_b" name="kursi" required>
+                                                                        <?php for ($i = 1; $i <= 20; $i++) : ?>
+
+                                                                            <?php
+                                                                            if ($dt->kursi == $i) :
+                                                                                $select = 'selected';
+                                                                            else :
+                                                                                $select = '';
+                                                                            endif;
+                                                                            ?>
+
+                                                                            <option <?= $select ?> value="<?= $i ?>"> <?= $i ?></option>
+                                                                        <?php endfor; ?>
+                                                                    </select>
+                                                                </div>
                                                             </div>
-
-                                                            <div class="form-group">
-                                                                <select class="form-control theSelect bagian" name="bagian" onchange="cekBagian()" required>
-                                                                    <option value="0">Pilih Bagian</option>
-
-                                                                    <?php for ($i = 'a'; $i <= 'b'; $i++) : ?>
-                                                                        <?php
-
-                                                                        if ($dt->bagian === $i) :
-                                                                            $select = 'selected';
-                                                                        else :
-                                                                            $select = '';
-                                                                        endif;
-                                                                        ?>
-
-                                                                        <option <?= $select ?> value="<?= $i ?>">Bagian <?= $i ?></option>
-
-                                                                    <?php endfor; ?>
-                                                                </select>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                <button type="submit" class="btn btn-primary">Ganti Gerbong</button>
                                                             </div>
-
-                                                            <div class="form-group">
-                                                                <select class="form-control theSelect bagian_a" name="kursi" required>
-                                                                    <?php for ($i = 1; $i <= 29; $i++) : ?>
-
-                                                                        <?php
-                                                                        if ($dt->kursi == $i) :
-                                                                            $select = 'selected';
-                                                                        else :
-                                                                            $select = '';
-                                                                        endif;
-                                                                        ?>
-
-                                                                        <option <?= $select ?> value="<?= $i ?>"> <?= $i ?></option>
-                                                                    <?php endfor; ?>
-                                                                </select>
-                                                            </div>
-
-                                                            <div class="form-group">
-                                                                <select class="form-control theSelect bagian_b" name="kursi" required>
-                                                                    <?php for ($i = 1; $i <= 20; $i++) : ?>
-
-                                                                        <?php
-                                                                        if ($dt->kursi == $i) :
-                                                                            $select = 'selected';
-                                                                        else :
-                                                                            $select = '';
-                                                                        endif;
-                                                                        ?>
-
-                                                                        <option <?= $select ?> value="<?= $i ?>"> <?= $i ?></option>
-                                                                    <?php endfor; ?>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                            <button type="button" class="btn btn-primary">Ganti Gerbong</button>
-                                                        </div>
+                                                        </form>
                                                     </div>
                                                 </div>
                                             </div>
