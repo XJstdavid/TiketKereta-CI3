@@ -62,7 +62,7 @@ class M_Guest extends CI_Model
 
     public function cekKonfirmasi($nomor)
     {
-        $this->db->where('nomor_tiket',$nomor);
+        $this->db->where('nomor_tiket', $nomor);
         return $this->db->get('penumpang');
     }
 
@@ -70,8 +70,9 @@ class M_Guest extends CI_Model
     {
         $data  = array(
             'bukti' => $nama,
+            'status' => 1,
         );
-        $this->db->where('no_pembayaran' ,$no);
+        $this->db->where('no_pembayaran', $no);
         return $this->db->update('pembayaran', $data);
     }
 }

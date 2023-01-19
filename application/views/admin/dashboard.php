@@ -69,8 +69,10 @@
                                             <td><?= $st->nama_stasiun ?></td>
                                             <td><img style="width: 200px" src="<?php echo $st->image; ?>"></td>
                                             <td>
-                                                <a href="<?= base_url('admin/dashboard/edit/' . $st->id) ?>" class="btn btn-outline-warning btn-sm"><i class="fa-solid fa-pen-to-square"></i></a>
-                                                <a href="<?= base_url('hapusStasiun/' . $st->id) ?>" class="delete btn btn-outline-danger btn-sm"><i class=" fa-solid fa-trash"></i></a>
+                                                <div class="d-flex">
+                                                    <a href="<?= base_url('admin/dashboard/edit/' . $st->id) ?>" class="btn btn-outline-warning btn-sm" style="margin-left: 10px;"><i class="fa-solid fa-pen-to-square"></i></a>
+                                                    <a href="<?= base_url('hapusStasiun/' . $st->id) ?>" class="delete btn btn-outline-danger btn-sm" style="margin-left: 10px;"><i class=" fa-solid fa-trash"></i></a>
+                                                </div>
                                             </td>
                                         </tr>
                                     <?php } ?>

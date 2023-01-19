@@ -80,8 +80,10 @@
                                                         <td><?= format_indo(date($jd->tgl_sampai)) ?></td>
                                                         <td><?= $jd->kelas ?></td>
                                                         <td>
-                                                            <a href="<?= base_url('admin/dashboard/edit-jadwal/' . $jd->id) ?>" class="btn btn-outline-warning btn-sm"><i class="fa-solid fa-pen-to-square"></i></a>
-                                                            <a href="<?= base_url('hapusJadwal/' . $jd->id) ?>" class="delete btn btn-outline-danger btn-sm"><i class=" fa-solid fa-trash"></i></a>
+                                                            <div class="d-flex">
+                                                                <a href="<?= base_url('admin/dashboard/edit-jadwal/' . $jd->id) ?>" class="btn btn-outline-warning btn-sm" style="margin-left: 10px;"><i class="fa-solid fa-pen-to-square"></i></a>
+                                                                <a href="<?= base_url('hapusJadwal/' . $jd->id) ?>" class="delete btn btn-outline-danger btn-sm" style="margin-left: 10px;"><i class=" fa-solid fa-trash"></i></a>
+                                                            </div>
                                                         </td>
                                                     </tr>
                                                 <?php } ?>
