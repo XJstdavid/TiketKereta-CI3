@@ -88,7 +88,7 @@
                                 <form class="form-horizontal" method="post" action="<?php echo base_url('tambahJadwal') ?>">
                                     <div class="form-group">
                                         <label>Nama Kereta</label>
-                                        <input type="text" class="form-control" name="nama_kereta" placeholder="Nama Kereta" required>
+                                        <input type="text" class="form-control theSelect" name="nama_kereta" placeholder="Nama Kereta" required>
                                     </div>
 
                                     <div class="form-group">

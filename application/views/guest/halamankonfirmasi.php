@@ -252,7 +252,7 @@
                             <?php if ($no_tiket->status === '2') : ?>
                                 <form action="<?= base_url('print') ?>" method="post">
                                     <input type="hidden" name="no_tiket" value="<?= $no_tiket->no_tiket ?>">
-                                    <button type="submit" class="btn btn-outline-info btn-block">Print Invoice</button>
+                                    <button type="submit" class="btn btn-outline-info float-right"><i class="fa fa-print"></i></button>
                                 </form>
                             <?php endif; ?>
 

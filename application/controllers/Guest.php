@@ -104,7 +104,7 @@ class Guest extends CI_Controller
             'email' => $this->input->post('email'),
             'no_telepon' => $this->input->post('no_telp'),
             'alamat' => $this->input->post('alamat'),
-            'tanggal' => date('Y-m-d'),
+            'tanggal' => date('Y-m-d:h:i:s'),
         );
 
         $this->M_Guest->insertPemesan($data);
@@ -205,6 +205,7 @@ class Guest extends CI_Controller
 
         $data['judul']  = 'XKereta | Print Invoice';
         $data['detail'] = $this->M_Guest->getPrint($no_tiket)->row();
+        $data['jml_penumpang'] = $this->M_Guest->cekKonfirmasi($no_tiket)->num_rows();
 
         $this->load->view('guest/template/header', $data);
         $this->load->view('print', $data);
