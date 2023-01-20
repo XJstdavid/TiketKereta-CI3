@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $judul ?></title>
-    <link rel="icon" href="<?= base_url('assets/icon.jpg') ?>" sizes="25x25">
+    <link rel="icon" href="<?= base_url('assets/icon.png') ?>">
     <!-- CSS -->
     <link rel="stylesheet" href="<?= base_url('assets/css/bootstrap.css') ?>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/css/select2.min.css">

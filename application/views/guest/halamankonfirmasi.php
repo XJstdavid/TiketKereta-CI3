@@ -52,7 +52,9 @@
                                         <th>Gerbong</th>
                                         <th>Bagian</th>
                                         <th>Kursi</th>
-                                        <th>Aksi</th>
+                                        <?php if ($no_tiket->status !== '2') : ?>
+                                            <th>Aksi</th>
+                                        <?php else : endif; ?>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -63,14 +65,15 @@
                                             <td><?= $dt->gerbong ?></td>
                                             <td><?= $dt->bagian ?></td>
                                             <td><?= $dt->kursi ?></td>
-                                            <td>
-                                                <?php if ($dt->gerbong === null || $dt->bagian === null || $dt->kursi === null) : ?>
-                                                    <a class="btn btn-sm btn-outline-warning" href="" data-toggle="modal" data-target="#pilihGerbong<?= $dt->id ?>">Pilih</a>
-                                                <?php else : ?>
-                                                    <a class="btn btn-sm btn-outline-info ml-2" href="" data-toggle="modal" data-target="#gantiGerbong<?= $dt->id ?>">Ganti</a>
-                                                <?php endif; ?>
-                                            </td>
-                                            <td></td>
+                                            <?php if ($no_tiket->status !== '2') : ?>
+                                                <td>
+                                                    <?php if ($dt->gerbong === null || $dt->bagian === null || $dt->kursi === null) : ?>
+                                                        <a class="btn btn-sm btn-outline-warning" href="" data-toggle="modal" data-target="#pilihGerbong<?= $dt->id ?>">Pilih</a>
+                                                    <?php else : ?>
+                                                        <a class="btn btn-sm btn-outline-info ml-2" href="" data-toggle="modal" data-target="#gantiGerbong<?= $dt->id ?>">Ganti</a>
+                                                    <?php endif; ?>
+                                                </td>
+                                            <?php else : endif; ?>
                                         </tr>
 
                                         <?php if ($dt->gerbong !== null && $dt->kursi !== null && $dt->bagian !== null) : ?>
@@ -245,6 +248,14 @@
                                 </tbody>
                             </table>
                             <p><b>Total Pembayaran Anda : </b> <b><?= 'Rp. ' . number_format($no_tiket->total_pembayaran, 0, ',', '.') ?> </b> </p>
+
+                            <?php if ($no_tiket->status === '2') : ?>
+                                <form action="<?= base_url('print') ?>" method="post">
+                                    <input type="hidden" name="no_tiket" value="<?= $no_tiket->no_tiket ?>">
+                                    <button type="submit" class="btn btn-outline-info btn-block">Print Invoice</button>
+                                </form>
+                            <?php endif; ?>
+
                             <?php if ($no_tiket->status === '0') : ?>
                                 <?= form_open_multipart('kirimKonfirmasi') ?>
                                 <input type="hidden" name="no_pembayaran" value="<?= $no_tiket->no_pembayaran ?>">

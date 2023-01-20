@@ -193,4 +193,13 @@ class Admin extends CI_Controller
             echo "Gagal";
         }
     }
+
+    public function halamanProfile()
+    {
+        $data = [
+            "current_user" => $this->auth_model->current_user(),
+        ];
+
+        $this->load->view('admin/profile', $data);
+    }
 }

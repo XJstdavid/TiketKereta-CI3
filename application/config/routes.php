@@ -2,6 +2,7 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 
 // Route User / Guest
+$route['print'] = 'guest/print';
 $route['PilihGerbong'] = 'guest/PilihGerbong';
 $route['konfirmasi'] = 'guest/halamankonfirmasi';
 $route['kirimKonfirmasi'] = 'guest/kirimKonfirmasi';
@@ -12,6 +13,7 @@ $route['pesan/(:any)'] = 'guest/pesan/$1';
 $route['cariTiket'] = 'guest/cari_tiket';
 
 // Route Admin
+$route['admin/profile'] = 'admin/halamanProfile';
 $route['verifikasi/(:num)'] = 'admin/verifikasiPembayaran/$1';
 $route['hapusJadwal/(:any)'] = 'admin/hapusJadwal/$1';
 $route['tambahJadwal'] = 'admin/tambah_jadwal';
@@ -27,7 +29,7 @@ $route['admin/dashboard'] = 'admin/halamanDashboard';
 $route['prosesLogin'] = 'admin/login';
 $route['logout'] = 'admin/logout';
 $route['login'] = 'admin/halamanlogin';
-$route['admin'] = 'admin/halamanDashboard';
+$route['admin'] = 'admin/halamanProfile';
 
 $route['default_controller'] = 'guest/halamanhome';
 

@@ -103,4 +103,13 @@ class M_Guest extends CI_Model
         $this->db->join('tiket', 'tiket.nomor_tiket=penumpang.nomor_tiket');
         return $this->db->get('penumpang');
     }
+
+    public function getPrint($no_tiket)
+    {
+        $this->db->select('*, Asal.nama_stasiun AS ASAL, Tujuan.nama_stasiun AS TUJUAN');
+        $this->db->join('jadwal', 'jadwal.id=tiket.id_jadwal');
+        $this->db->join('stasiun as Asal', 'jadwal.asal = Asal.id', 'left');
+        $this->db->join('stasiun as Tujuan', 'jadwal.tujuan = Tujuan.id', 'left');
+        return $this->db->get('tiket');
+    }
 }

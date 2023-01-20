@@ -104,6 +104,7 @@ class Guest extends CI_Controller
             'email' => $this->input->post('email'),
             'no_telepon' => $this->input->post('no_telp'),
             'alamat' => $this->input->post('alamat'),
+            'tanggal' => date('Y-m-d'),
         );
 
         $this->M_Guest->insertPemesan($data);
@@ -196,5 +197,17 @@ class Guest extends CI_Controller
             </div>');
             redirect('konfirmasi');
         }
+    }
+
+    public function print()
+    {
+        $no_tiket = $this->input->post('no_tiket');
+
+        $data['judul']  = 'XKereta | Print Invoice';
+        $data['detail'] = $this->M_Guest->getPrint($no_tiket)->row();
+
+        $this->load->view('guest/template/header', $data);
+        $this->load->view('print', $data);
+        $this->load->view('guest/template/footer');
     }
 }
