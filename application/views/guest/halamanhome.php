@@ -2,16 +2,16 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8">
-                <br> <br> <br> <br>
-                <h1 class="display-4 text-white">Selamat Datang Di XKereta</h1>
-                <p class="lead text-white">Website Pembelian Tiket Kereta Dengan Mudah.</p>
+                <br> <br> <br> <br> <br>
+                <h1 class="display-4 text-white font-weight-bolder">Selamat Datang Di XKereta</h1>
+                <p class="lead text-white font-italic">Website Pembelian Tiket Kereta Dengan Mudah & Praktis</p>
             </div>
             <div class="col-md-4">
                 <form action="<?= base_url('cariTiket') ?>" method="post">
                     <div class="accordion-toggle">
-                        <h6>PEMESANAN TIKET</h6>
+                        <h6 class="text-white font-weight-bold">PEMESANAN TIKET</h6>
                         <div class="form-group">
-                            <label>Stasiun Asal</label>
+                            <label class="text-white font-weight-bolder">Stasiun Asal</label>
                             <select name="asal" class="form-control theSelect">
                                 <option disabled selected>Stasiun Asal</option>
                                 <?php foreach ($stasiun as $st) : ?>
@@ -20,8 +20,8 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label>Stasiun Tujuan</label>
-                            <select name="tujuan" class="form-control theSelect">
+                            <label class="text-white font-weight-bolder">Stasiun Tujuan</label>
+                            <select name=" tujuan" class="form-control theSelect">
                                 <option disabled selected>Stasiun Tujuan</option>
                                 <?php foreach ($stasiun as $st) : ?>
                                     <option value="<?= $st->id; ?>"><?= $st->nama_stasiun; ?></option>
@@ -29,11 +29,11 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label>Tanggal Keberangkatan</label>
+                            <label class="text-white font-weight-bolder">Tanggal Keberangkatan</label>
                             <input type="date" name="tanggal" class="form-control">
                         </div>
                         <div class="form-group">
-                            <label>Jumlah Penumpang</label>
+                            <label class="text-white font-weight-bolder">Jumlah Penumpang</label>
                             <select name="jumlah" class="form-control">
                                 <option disabled selected>Jumlah Penumpang</option>
                                 <?php for ($i = 1; $i <= 5; $i++) : ?>

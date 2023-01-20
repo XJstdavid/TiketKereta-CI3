@@ -12,7 +12,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/css/select2.min.css">
     <style>
         .jumbotron {
-            background: url('<?= base_url("assets/bg-home.jpg") ?>');
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('<?= base_url("assets/bg-home.jpg") ?>');
+
         }
     </style>
 </head>
