@@ -27,7 +27,7 @@
             <div class="row">
                 <div class="container-fluid my-5">
                     <div class="row justify-content-center">
-                        <div class="col-md-6 mt-4">
+                        <div class="col-md-6 mt-5">
                             <div class="card">
                                 <div class="card-header bg-primary text-white text-center">Edit Data Jadwal</div>
                                 <div class="card-body">

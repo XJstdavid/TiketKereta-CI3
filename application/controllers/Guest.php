@@ -9,7 +9,7 @@ class Guest extends CI_Controller
         $data['stasiun'] = $this->M_Guest->getDataStasiun()->result();
         $this->load->view('guest/template/header', $data);
         $this->load->view('guest/halamanhome');
-        $this->load->view('guest/template/footer');
+        $this->load->view('guest/template/footer_home');
     }
 
     public function halamankonfirmasi()
@@ -34,6 +34,7 @@ class Guest extends CI_Controller
         $data = array(
             'asal' => $this->input->post('asal'),
             'tujuan' => $this->input->post('tujuan'),
+            'status' => 0
         );
 
         $data['tiket'] = $this->M_Guest->cari_tiket($data)->result();

@@ -92,4 +92,25 @@ class M_Admin extends CI_Model
         $this->db->where('id', $id);
         return $this->db->update('pembayaran', $data);
     }
+
+    public function prosesBerangkat($id)
+    {
+        $data = array(
+            'status' => 1
+        );
+        $this->db->where('id', $id);
+        return $this->db->update('jadwal', $data);
+    }
+
+    public function getPenumpamg()
+    {
+        $this->db->join('tiket', 'tiket.nomor_tiket = penumpang.nomor_tiket');
+        return $this->db->get('penumpang');
+    }
+
+    public function getTiket()
+    {
+        // $this->db->join('tiket', 'tiket.nomor_tiket = tiket.nomor_tiket');
+        return $this->db->get('tiket');
+    }
 }

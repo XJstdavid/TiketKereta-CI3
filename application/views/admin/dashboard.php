@@ -15,51 +15,88 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap5.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/css/select2.min.css">
     <link rel="icon" href="<?= base_url('assets/icon.png') ?>">
+
 </head>
 
 <body>
 
     <?php include 'include/nav.php' ?>
     <!--Container Main start-->
-    <div class="container-fluid my-5">
-        <div class="row">
+    <div id="page-content-wrapper">
+        <div class="container-fluid mt-5">
+            <div class="row">
 
-            <div class="col-md-12 mt-4">
-                <div class="card">
-                    <div class="card-header bg-primary text-white text-center" style="margin-bottom: 10px;">Daftar Stasiun</div>
-                    <?= $this->session->flashdata('pesan') ?>
+
+                <div class="col-md-12 mt-4">
+                    <h4>Data Stasiun</h4>
                     <div class="col-md-12 mt-3">
-                        <a class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#exampleModal" style="margin-left: 10px; margin-bottom: 10px;">Tambah Data Stasiun</a>
-                        <br>
-                        <?= $this->session->flashdata('berhasil'); ?>
-                    </div>
-                    <div class="card-body">
-                        <table id="data" class="display table table-bordered table-sm">
-                            <thead>
-                                <tr>
-                                    <th>No</th>
-                                    <th>Nama Stasiun</th>
-                                    <th>Gambar</th>
-                                    <th>Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php $no = 1;
-                                foreach ($stasiun as $st) { ?>
+
+                        <?= $this->session->flashdata('pesan') ?>
+                        <div class="col-md-12 mt-3">
+                            <a class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#exampleModal" style="margin-left: 10px; margin-bottom: 10px;">Tambah Data Stasiun</a>
+                            <br>
+                            <?= $this->session->flashdata('berhasil'); ?>
+                        </div>
+
+                        <div class="card-body">
+                            <table id="data" class="display table table-bordered table-sm">
+                                <thead>
                                     <tr>
-                                        <td><?= $no++ ?></td>
-                                        <td><?= $st->nama_stasiun ?></td>
-                                        <td><img style="width: 200px" src="<?php echo $st->image; ?>"></td>
-                                        <td>
-                                            <div class="d-flex">
-                                                <a href="<?= base_url('admin/dashboard/edit/' . $st->id) ?>" class="btn btn-outline-warning btn-sm" style="margin-left: 10px;"><i class="fa-solid fa-pen-to-square"></i></a>
-                                                <a href="<?= base_url('hapusStasiun/' . $st->id) ?>" class="delete btn btn-outline-danger btn-sm" style="margin-left: 10px;"><i class=" fa-solid fa-trash"></i></a>
-                                            </div>
-                                        </td>
+                                        <th>No</th>
+                                        <th>Nama Stasiun</th>
+                                        <th>Gambar</th>
+                                        <th>Aksi</th>
                                     </tr>
-                                <?php } ?>
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    <?php $no = 1;
+                                    foreach ($stasiun as $st) { ?>
+                                        <tr>
+                                            <td><?= $no++ ?></td>
+                                            <td><?= $st->nama_stasiun ?></td>
+                                            <td><img style="width: 200px" src="<?php echo $st->image; ?>"></td>
+                                            <td>
+                                                <div class="d-flex">
+                                                    <a href="<?= base_url('admin/dashboard/edit/' . $st->id) ?>" class="btn btn-outline-warning btn-sm" style="margin-left: 10px;"><i class="fa-solid fa-pen-to-square"></i></a>
+                                                    <a href="<?= base_url('hapusStasiun/' . $st->id) ?>" class="delete btn btn-outline-danger btn-sm" style="margin-left: 10px;"><i class=" fa-solid fa-trash"></i></a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    <?php } ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Form Tambah Data Stasiun</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal" method="post" action="<?php echo base_url('tambahStasiun') ?>" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label>Nama Stasiun</label>
+                                <input type="text" class="form-control" name="stasiun" placeholder="Nama Stasiun">
+                            </div>
+                            <div class="form-group">
+                                <label>Upload Gambar</label>
+                                <input type="file" class="form-control" name="image" placeholder="Gambar Stasiun" accept="image/" onchange="loadFile(event)">
+                                <br>
+                                <img id="output" width="200" src="https://st4.depositphotos.com/14953852/22772/v/600/depositphotos_227725052-stock-illustration-image-available-icon-flat-vector.jpg" class="center">
+                                <br>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="submit" name="submit" class="btn btn-primary">Tambah Stasiun</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -67,36 +104,6 @@
     </div>
 
 
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Form Tambah Data Stasiun</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form class="form-horizontal" method="post" action="<?php echo base_url('tambahStasiun') ?>" enctype="multipart/form-data">
-                        <div class="form-group">
-                            <label>Nama Stasiun</label>
-                            <input type="text" class="form-control" name="stasiun" placeholder="Nama Stasiun">
-                        </div>
-                        <div class="form-group">
-                            <label>Upload Gambar</label>
-                            <input type="file" class="form-control" name="image" placeholder="Gambar Stasiun" accept="image/" onchange="loadFile(event)">
-                            <br>
-                            <img id="output" width="200" src="https://st4.depositphotos.com/14953852/22772/v/600/depositphotos_227725052-stock-illustration-image-available-icon-flat-vector.jpg" class="center">
-                            <br>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" name="submit" class="btn btn-primary">Tambah Stasiun</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    </div>
     <!--Container Main end-->
 
 

@@ -187,7 +187,7 @@
 
 
         <div class="text-data mt-3">
-            <span class="name" style="font-size: 15px;">Create At : <?= format_indo(date(($current_user->last_login))); ?></span>
+            <span class="name" style="font-size: 15px;">Create At : <?= format_indo(date(($current_user->created_at))); ?></span>
             <span class="name" style="font-size: 15px;">Last Login : <?= format_indo(date(($current_user->last_login))) ?></span>
         </div>
 

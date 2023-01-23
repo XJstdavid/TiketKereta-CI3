@@ -20,60 +20,57 @@
 <body>
 
     <?php include 'include/nav.php' ?>
-    <!--Container Main start-->
     <div id="page-content-wrapper">
-        <div class="container-fluid">
+        <div class="container-fluid mt-5">
             <div class="row">
 
 
+                <div class="col-md-12 mt-4">
+                    <h4>Data Invoices</h4>
+                    <div class="col-md-12 mt-3">
+                        <?= $this->session->flashdata('berhasil'); ?>
 
-                <div class="container-fluid my-5">
-                    <div class="row">
-                        <div class="col-md-12 mt-4">
-                            <?= $this->session->flashdata('berhasil'); ?>
-                            <div class="card">
-                                <div class="card-header bg-primary text-white text-center">Invoice Pelanggan</div>
-                                <div class="col-md-12 mt-3">
-                                    <div class="card-body">
-                                        <div class="table-responsive">
-                                            <table class="table table-bordered">
-                                                <thead>
-                                                    <tr>
-                                                        <th>No Pembayaran</th>
-                                                        <th>No Tiket</th>
-                                                        <th>Total Pembayaran</th>
-                                                        <th>Bukti Pembayaran</th>
-                                                        <th>Aksi</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <?php foreach ($list as $li) : ?>
-                                                        <tr>
-                                                            <td><?= $li->no_pembayaran ?></td>
-                                                            <td><?= $li->no_tiket ?></td>
-                                                            <td><?= $li->total_pembayaran ?></td>
-                                                            <td>
-                                                                <a href="<?= base_url('assets/bukti/' . $li->bukti) ?>" target="_blank">
-                                                                    <img width="25%" src="<?= base_url('assets/bukti/' . $li->bukti) ?>">
-                                                                </a>
-                                                            </td>
-                                                            <td>
+                        <div class="col-md-12 mt-3">
+                            <div class="card-body">
 
-                                                                <a href="<?= base_url('verifikasi/' . $li->id) ?>" class="konfirmasi btn btn-outline-success"><i class="bi bi-patch-check-fill"></i></a>
-                                                            </td>
-                                                        </tr>
-                                                    <?php endforeach; ?>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
+                                <table id="data" class="display table table-bordered table-sm">
+                                    <thead>
+                                        <tr>
+                                            <th>No Pembayaran</th>
+                                            <th>No Tiket</th>
+                                            <th>Total Pembayaran</th>
+                                            <th>Bukti Pembayaran</th>
+                                            <th>Aksi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php foreach ($list as $li) : ?>
+                                            <tr>
+                                                <td><?= $li->no_pembayaran ?></td>
+                                                <td><?= $li->no_tiket ?></td>
+                                                <td><?= $li->total_pembayaran ?></td>
+                                                <td>
+                                                    <a href="<?= base_url('assets/bukti/' . $li->bukti) ?>" target="_blank">
+                                                        <img width="25%" src="<?= base_url('assets/bukti/' . $li->bukti) ?>">
+                                                    </a>
+                                                </td>
+                                                <td>
+
+                                                    <a href="<?= base_url('verifikasi/' . $li->id) ?>" class="konfirmasi btn btn-outline-success"><i class="bi bi-patch-check-fill"></i></a>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+    </div>
+    </div>
     </div>
     <!-- /#page-content-wrapper -->
 

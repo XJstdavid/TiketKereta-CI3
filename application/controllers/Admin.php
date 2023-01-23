@@ -202,4 +202,32 @@ class Admin extends CI_Controller
 
         $this->load->view('admin/profile', $data);
     }
+
+    public function prosesBerangkat($id)
+    {
+        $update = $this->M_Admin->prosesBerangkat($id);
+        if ($update) {
+            $this->session->set_flashdata('pesan', '<div class="alert alert-success alert-dismissible fade show" role="alert" style="width: 100%">
+            <strong>Berhasil!</strong> Data Jadwal Berhasil Di Ubah
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>');
+            redirect('admin/dashboard/kelola-jadwal');
+        }
+    }
+
+    public function halamanPenumpang()
+    {
+        $data['judul']  = 'XKereta - Admin';
+        $data['penumpang']   = $this->M_Admin->getPenumpamg()->result();
+
+        $this->load->view('admin/data-penumpang', $data);
+    }
+
+    public function halamanTiket()
+    {
+        $data['judul']  = 'XKereta - Admin';
+        $data['tiket']   = $this->M_Admin->getTiket()->result();
+
+        $this->load->view('admin/data-tiket', $data);
+    }
 }
