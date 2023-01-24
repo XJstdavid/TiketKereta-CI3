@@ -13,14 +13,14 @@ $route['pesan/(:any)'] = 'guest/pesan/$1';
 $route['cariTiket'] = 'guest/cari_tiket';
 
 // Route Admin
-$route['admin/dashboard/data-tiket'] = 'admin/halamanTiket';
-$route['admin/dashboard/data-penumpang'] = 'admin/halamanPenumpang';
-$route['admin/dashboard/berangkat-jadwal/(:any)'] = 'admin/prosesBerangkat/$1';
+$route['admin/dash'] = 'admin/halamanDash';
+$route['admin/data-tiket'] = 'admin/halamanTiket';
+$route['admin/data-penumpang'] = 'admin/halamanPenumpang';
 $route['admin/profile'] = 'admin/halamanProfile';
 $route['verifikasi/(:num)'] = 'admin/verifikasiPembayaran/$1';
 $route['hapusJadwal/(:any)'] = 'admin/hapusJadwal/$1';
 $route['tambahJadwal'] = 'admin/tambah_jadwal';
-$route['admin/dashboard/kelola-jadwal'] = 'admin/kelolajadwal';
+$route['admin/kelola-jadwal'] = 'admin/kelolajadwal';
 $route['admin/konfirmasi-pembayaran'] = 'admin/halamanKonfirmasi';
 $route['editJadwal'] = 'admin/update_jadwal';
 $route['admin/dashboard/edit-jadwal/(:any)'] = 'admin/editJadwal/$1';
@@ -28,8 +28,8 @@ $route['editStasiun'] = 'admin/update_stasiun';
 $route['admin/dashboard/edit/(:any)'] = 'admin/edit_stasiun/$1';
 $route['hapusStasiun/(:any)'] = 'admin/hapus_stasiun/$1';
 $route['tambahStasiun'] = 'admin/tambah_stasiun';
-$route['admin/dashboard'] = 'admin/halamanDashboard';
-$route['admin'] = 'admin/halamanDashboard';
+$route['admin/stasiun'] = 'admin/halamanDashboard';
+$route['admin'] = 'admin/halamanDash';
 
 $route['default_controller'] = 'guest/halamanhome';
 $route['404_override'] = 'Costum404';

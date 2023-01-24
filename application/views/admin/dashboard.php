@@ -7,7 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $judul; ?> | Kelola Jadwal</title>
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
-    <link href='<?= base_url('assets/css/costum.css') ?>' rel='stylesheet'>
+
+    <link rel="stylesheet" href="<?= base_url('assets/admins/') ?>css/main/app.css">
+    <link rel="stylesheet" href="<?= base_url('assets/admins/') ?>css/main/app-dark.css">
+    <link rel="stylesheet" href="<?= base_url('assets/admins/') ?>css/shared/iconly.css">
 
     <!-- bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
@@ -109,7 +112,12 @@
 
 
     <!-- Script JS -->
-    <script src="<?= base_url('assets/js/costum.js') ?>"></script>
+    <script src="<?= base_url('assets/admins/') ?>js/bootstrap.js"></script>
+    <script src="<?= base_url('assets/admins/') ?>js/app.js"></script>
+
+    <!-- Need: Apexcharts -->
+    <script src="<?= base_url('assets/admins/') ?>extensions/apexcharts/apexcharts.min.js"></script>
+    <script src="<?= base_url('assets/admins/') ?>js/pages/dashboard.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/ff4c215153.js" crossorigin="anonymous"></script>

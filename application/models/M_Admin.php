@@ -113,4 +113,14 @@ class M_Admin extends CI_Model
         // $this->db->join('tiket', 'tiket.nomor_tiket = tiket.nomor_tiket');
         return $this->db->get('tiket');
     }
+
+    public function hitungTotalStasiun()
+    {
+        $query = $this->db->get('stasiun');
+        if ($query->num_rows() > 0) {
+            return $query->num_rows();
+        } else {
+            return 0;
+        }
+    }
 }

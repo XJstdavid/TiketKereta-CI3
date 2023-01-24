@@ -230,4 +230,12 @@ class Admin extends CI_Controller
 
         $this->load->view('admin/data-tiket', $data);
     }
+
+    public function halamanDash()
+    {
+        $data['judul']  = 'XKereta - Admin';
+        $data['total_stasiun'] = $this->M_Admin->hitungTotalStasiun();
+
+        $this->load->view('admin/dash', $data);
+    }
 }
